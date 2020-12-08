@@ -1,7 +1,5 @@
 // const arr = [1, 2, 3];
 
-const { isUndefined } = require("lodash");
-
 // // a=1 b=2 c=3
 // const [a, b, c] = arr;
 
