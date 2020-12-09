@@ -482,10 +482,10 @@ const p1 = {
 // console.log(p2.fullName);
 
 // // 通过以下方式实现 就不会有上面的问题 ** 未实现 报错
-const descriptor = Object.getOwnPropertyDescriptors(p1, "fullName");
-const p3 = Object.defineProperties({}, descriptor);
-p3.firstName = "ss";
-console.log(p3.fullName);
+// const descriptor = Object.getOwnPropertyDescriptors(p1, "fullName");
+// const p3 = Object.defineProperties({}, descriptor);
+// p3.firstName = "ss";
+// console.log(p3.fullName);
 
 // =================================================
 
