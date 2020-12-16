@@ -1,0 +1,17 @@
+{
+  "name": "create-scaffold",
+  "version": "1.0.0",
+  "description": "create a scaffold",
+  "main": "index.js",
+  "bin": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "gufeifei",
+  "license": "ISC",
+  "devDependencies": {
+    "ejs": "^3.1.5",
+    "inquirer": "^7.3.3"
+  }
+}
