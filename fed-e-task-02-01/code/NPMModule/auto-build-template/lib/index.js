@@ -8,69 +8,103 @@ const loadPlugin = require("gulp-load-plugins");
 const plugins = loadPlugin();
 
 const cwd = process.cwd();
-let config = {};
+let config = {
+  build: {
+    src: "src",
+    dist: "dist",
+    temp: "temp",
+    public: "public",
+    paths: {
+      styles: "assets/styles/*.scss",
+      scripts: "assets/scripts/*.js",
+      pages: "**.html",
+      images: "assets/images/**",
+      fonts: "assets/fonts/**",
+    },
+  },
+};
 
 try {
-  config = require(path.join(cwd, "auto.config.js"));
-  console.log(config);
+  const configJs = require(path.join(cwd, "auto.config.js"));
+  config = Object.assign({}, config, configJs);
 } catch (e) {}
 
 const clean = () => {
-  return del(["dist", "temp"]);
+  return del([config.build.dist, config.build.temp]);
 };
 
 const style = () => {
-  return src("src/assets/styles/*.scss", { base: "src" })
+  return src(config.build.paths.styles, {
+    base: config.build.src,
+    cwd: config.build.src,
+  })
     .pipe(plugins.sass({ outputStyle: "expanded" }))
-    .pipe(dest("temp"))
+    .pipe(dest(config.build.temp))
     .pipe(bs.reload({ stream: true }));
 };
 
 const script = () => {
   return (
-    src("src/assets/scripts/*.js", { base: "src" })
+    src(config.build.paths.scripts, {
+      base: config.build.src,
+      cwd: config.build.src,
+    })
       // 使用对象 require @babel/preset-env 就会在当前目录找 找不到就会到上一层目录找 如果是string 就会直接在项目下的node_modules目录去找 就会找不到
       .pipe(plugins.babel({ presets: [require("@babel/preset-env")] }))
-      .pipe(dest("temp"))
+      .pipe(dest(config.build.temp))
       .pipe(bs.reload({ stream: true }))
   );
 };
 
 const page = () => {
-  return src("src/**.html", { base: "src" })
+  return src(config.build.paths.pages, {
+    base: config.build.src,
+    cwd: config.build.src,
+  })
     .pipe(plugins.swig({ data: config.data, defaults: { cache: false } }))
-    .pipe(dest("temp"))
+    .pipe(dest(config.build.temp))
     .pipe(bs.reload({ stream: true }));
 };
 
 const image = () => {
-  return src("src/assets/images/**", { base: "src" })
+  return src(config.build.paths.images, {
+    base: config.build.src,
+    cwd: config.build.src,
+  })
     .pipe(plugins.imagemin())
-    .pipe(dest("dist"));
+    .pipe(dest(config.build.dist));
 };
 
 const font = () => {
-  return src("src/assets/fonts/**", { base: "src" })
+  return src(config.build.paths.fonts, {
+    base: config.build.src,
+    cwd: config.build.src,
+  })
     .pipe(plugins.imagemin())
-    .pipe(dest("dist"));
+    .pipe(dest(config.build.dist));
 };
 
 const extra = () => {
-  return src("public/**", { base: "public" }).pipe(dest("dist"));
+  return src("**", {
+    base: config.build.public,
+    cwd: config.build.public,
+  }).pipe(dest(config.build.dist));
 };
 
 const server = () => {
-  watch("src/assets/styles/*.scss", style);
-  watch("src/assets/scripts/*.js", script);
-  watch("src/**.html", page);
+  watch(config.build.paths.styles, { cwd: config.build.src }, style);
+  watch(config.build.paths.scripts, { cwd: config.build.src }, script);
+  watch(config.build.paths.pages, { cwd: config.src }, page);
   // watch("src/assets/images/**", image);
   // watch("src/assets/fonts/**", font);
   // watch("public/**", extra);
   // 优化
   watch(
-    ["src/assets/images/**", "src/assets/fonts/**", "public/**"],
+    [config.build.paths.images, config.build.paths.fonts, config.build.public],
+    { cwd: config.build.src },
     bs.reload
   );
+  watch(["**"], { cwd: config.build.public }, bs.reload);
   bs.init({
     notify: false,
     port: 3000,
@@ -78,7 +112,7 @@ const server = () => {
     // 监听变化 改变时页面改变 这里用bs.reload({stream:true})代替
     // files: "dist/**",
     server: {
-      baseDir: ["temp", "src", "public"],
+      baseDir: [config.build.temp, config.build.src, config.build.public],
       routes: {
         "/node_modules": "node_modules",
       },
@@ -88,8 +122,11 @@ const server = () => {
 
 const useref = () => {
   return (
-    src("temp/*.html", { base: "temp" })
-      .pipe(plugins.useref({ searchPath: ["temp", "."] }))
+    src(config.build.paths.pages, {
+      base: config.build.temp,
+      cwd: config.build.temp,
+    })
+      .pipe(plugins.useref({ searchPath: [config.build.temp, "."] }))
       // 会创建一个新文件vendor 对这些文件进行操作
       .pipe(plugins.if(/\.js$/, plugins.uglify()))
       .pipe(plugins.if(/\.css$/, plugins.cleanCss()))
@@ -103,7 +140,7 @@ const useref = () => {
           })
         )
       )
-      .pipe(dest("dist"))
+      .pipe(dest(config.build.dist))
   );
 };
 
