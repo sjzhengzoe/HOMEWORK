@@ -2,7 +2,7 @@
   "name": "auto-build-template",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +23,8 @@
     "gulp-sass": "^4.1.0",
     "gulp-swig": "^0.9.1",
     "gulp-uglify": "^3.0.2",
-    "gulp-useref": "^5.0.0"
-  }
+    "gulp-useref": "^5.0.0",
+    "browser-sync": "^2.26.13"
+  },
+  "devDependencies": {}
 }

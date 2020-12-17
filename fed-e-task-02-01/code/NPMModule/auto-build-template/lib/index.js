@@ -1,4 +1,5 @@
 const { src, dest, series, parallel, watch } = require("gulp");
+const path = require("path");
 const del = require("del");
 const browserSync = require("browser-sync");
 const bs = browserSync.create();
@@ -6,45 +7,13 @@ const bs = browserSync.create();
 const loadPlugin = require("gulp-load-plugins");
 const plugins = loadPlugin();
 
-const data = {
-  menus: [
-    {
-      name: "Home",
-      icon: "aperture",
-      link: "index.html",
-    },
-    {
-      name: "Features",
-      icon: "aperture",
-      link: "features.html",
-    },
-    {
-      name: "About",
-      icon: "aperture",
-      link: "about.html",
-    },
-    {
-      name: "Contact",
-      icon: "#",
-      children: [
-        {
-          name: "Twitter",
-          link: "https://twitter.com/w_zce",
-        },
-        {
-          name: "About",
-          link: "https://weibo.com/zceme",
-        },
-        {
-          name: "Twitter",
-          link: "https://twitter.com/w_zce",
-        },
-      ],
-    },
-  ],
-  pkg: require("./package.json"),
-  date: new Date(),
-};
+const cwd = process.cwd();
+let config = {};
+
+try {
+  config = require(path.join(cwd, "auto.config.js"));
+  console.log(config);
+} catch (e) {}
 
 const clean = () => {
   return del(["dist", "temp"]);
@@ -58,15 +27,18 @@ const style = () => {
 };
 
 const script = () => {
-  return src("src/assets/scripts/*.js", { base: "src" })
-    .pipe(plugins.babel({ presets: ["@babel/preset-env"] }))
-    .pipe(dest("temp"))
-    .pipe(bs.reload({ stream: true }));
+  return (
+    src("src/assets/scripts/*.js", { base: "src" })
+      // 使用对象 require @babel/preset-env 就会在当前目录找 找不到就会到上一层目录找 如果是string 就会直接在项目下的node_modules目录去找 就会找不到
+      .pipe(plugins.babel({ presets: [require("@babel/preset-env")] }))
+      .pipe(dest("temp"))
+      .pipe(bs.reload({ stream: true }))
+  );
 };
 
 const page = () => {
   return src("src/**.html", { base: "src" })
-    .pipe(plugins.swig({ data, defaults: { cache: false } }))
+    .pipe(plugins.swig({ data: config.data, defaults: { cache: false } }))
     .pipe(dest("temp"))
     .pipe(bs.reload({ stream: true }));
 };
