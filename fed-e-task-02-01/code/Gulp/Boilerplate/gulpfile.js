@@ -145,7 +145,7 @@ const build = series(
 const develop = series(compile, server);
 
 module.exports = {
-  compile,
+  clean,
   build,
   develop,
 };
