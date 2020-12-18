@@ -1,7 +1,7 @@
 {
-  "name": "sujie-test",
+  "name": "auto-build-templates",
   "version": "1.0.0",
-  "description": "desc",
+  "description": "",
   "main": "lib/index.js",
   "bin": "bin/auto.js",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "keywords": [],
   "author": "gufeifei",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
@@ -32,7 +32,8 @@
     "gulp-sass": "^4.1.0",
     "gulp-uglify": "^3.0.2",
     "gulp-useref": "^5.0.0",
-    "browser-sync": "^2.26.13"
+    "browser-sync": "^2.26.13",
+    "gulp-swig": "^0.9.1"
   },
   "devDependencies": {}
 }
