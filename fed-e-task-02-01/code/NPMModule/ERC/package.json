@@ -35,7 +35,6 @@
     "not dead"
   ],
   "dependencies": {
-    "auto-build-template": "file:../auto-build-template",
     "bootstrap": "4.4.1",
     "browser-sync": "^2.26.13",
     "jquery": "3.4.1",
