@@ -1,7 +1,7 @@
 {
   "name": "sujie-test",
   "version": "1.0.0",
-  "description": "",
+  "description": "desc",
   "main": "lib/index.js",
   "bin": "bin/auto.js",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "keywords": [],
   "author": "gufeifei",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
