@@ -11,6 +11,10 @@
     "bin",
     "lib"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sjzhengzoe/HOMEWORK.git"
+  },
   "keywords": [],
   "author": "gufeifei",
   "license": "ISC",
