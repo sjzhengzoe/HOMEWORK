@@ -24,9 +24,9 @@
     "url": "https://zce.me"
   },
   "scripts": {
-    "clean": "gulp clean",
-    "build": "gulp build",
-    "server": "gulp develop"
+    "clean": "auto-build-templates clean",
+    "build": "auto-build-templates build",
+    "server": "auto-build-templates develop"
   },
   "browserslist": [
     "last 1 version",
@@ -41,6 +41,7 @@
     "popper.js": "1.16.1"
   },
   "devDependencies": {
+    "auto-build-templates": "^1.0.0",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
     "sujie-test": "^1.0.0"
