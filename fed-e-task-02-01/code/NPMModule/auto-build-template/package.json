@@ -12,7 +12,7 @@
     "lib"
   ],
   "keywords": [],
-  "author": "",
+  "author": "gufeifei",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.12.10",
