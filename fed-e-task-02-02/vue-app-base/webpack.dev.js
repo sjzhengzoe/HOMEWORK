@@ -6,10 +6,8 @@ module.exports = {
   devtool: "eval-cheap-module-source-map",
   devServer: {
     contentBase: path.join(__dirname, "src"),
-    inline: true,
     port: 3000,
     hot: true,
-    watchContentBase: true,
   },
   target: "web",
   stats: "normal",

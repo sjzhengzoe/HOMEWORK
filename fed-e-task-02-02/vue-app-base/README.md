@@ -1,6 +1,16 @@
-# vue-app-base
+本地开发 npm run server
+打包 npm run build
 
-1. 这是一个使用 Vue CLI 创建出来的 Vue 项目基础结构
-2. 有所不同的是这里我移除掉了 vue-cli-service（包含 webpack 等工具的黑盒工具）
-3. 这里的要求就是直接使用 webpack 以及你所了解的周边工具、Loader、Plugin 还原这个项目的打包任务
-4. 尽可能的使用上所有你了解到的功能和特性
+1、配置项目入口
+webpack 从该入口开始对文件处理
+文件都会交给对应的 loader 处理
+并以函数的形式存在打包后的文件中
+
+2、新特性打包
+使用 babel 对于 es6 的一些语法和 API 转换成 es5 的语法
+
+3、热更
+
+4、优化设置
+
+5、按需加载
