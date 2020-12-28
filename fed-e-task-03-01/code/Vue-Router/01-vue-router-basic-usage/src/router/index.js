@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from '../vue-router'
 import Index from '../views/Index.vue'
-// 1. 注册路由插件
+// 1. 注册路由插件 接受一个函数 或者 一个对象(调用静态方法install)
 Vue.use(VueRouter)
 
 // 路由规则
