@@ -12,11 +12,75 @@ export default class VueRouter {
     // 混入 可以在 Vue 实例中混入一个选项
     _Vue.mixin({
       beforeCreate () {
-        // 过滤组件的 router
+        // 过滤组件的 beforeCreate
         if (this.$options.router) {
           _Vue.prototype.$router = this.$options.router
+          this.$options.router.init()
         }
       }
+    })
+  }
+
+  constructor (options) {
+    this.options = options
+    this.routeMap = {}
+    this.data = _Vue.observable({
+      current: window.location.pathname
+    })
+  }
+
+  init () {
+    this.createRouteMap()
+    this.initComponents(_Vue)
+    this.initEvent()
+  }
+
+  createRouteMap () {
+    this.options.routes.forEach(route => {
+      this.routeMap[route.path] = route.component
+    })
+  }
+
+  initComponents (Vue) {
+    Vue.component('router-link', {
+      props: {
+        to: String
+      },
+      render (h) {
+        return h(
+          'a',
+          {
+            attrs: {
+              href: this.to
+            },
+            on: {
+              click: this.clickHandler
+            }
+          },
+          [this.$slots.default]
+        )
+      },
+      // template: '<a :href="to"><slot></slot></a>'
+
+      methods: {
+        clickHandler (e) {
+          history.pushState({}, '', this.to)
+          this.$router.data.current = this.to
+          e.preventDefault()
+        }
+      }
+    })
+    Vue.component('router-view', {
+      render: h => {
+        const component = this.routeMap[this.data.current]
+        return h(component)
+      }
+    })
+  }
+
+  initEvent () {
+    window.addEventListener('popstate', () => {
+      this.data.current = window.location.pathname
     })
   }
 }
