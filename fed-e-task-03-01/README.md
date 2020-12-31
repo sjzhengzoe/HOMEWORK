@@ -17,7 +17,7 @@ let vm = new Vue({
 回答：
   因为在一开始初始化的时候只会给当前data和data内部的变量绑定get和set方法进行监听是否发生数据改变，所以对于新增的dog属性并没有绑定set和get方法，就不是响应式数据。
 
-  如果要把新增成员设置成响应式数据，需要给新增成员绑定get和set方法，可以将walk暴露出来，将新增加的成员和原本的data成员进行合并，然后调用_proxyData(newData)绑定vue实例中的data，再调用walk(newData)绑定$data，即可设置新增成员为响应式数据。
+  如果要把新增成员设置成响应式数据，需要给新增成员绑定get和set方法，可以将walk和compile暴露出来，将新增加的成员和原本的data成员进行合并，然后调用_proxyData(newData)绑定vue实例中的data，再调用walk(newData)绑定$data，再调用compile(vm.$el)重新编译，即可设置新增成员为响应式数据。
 
  
 ## 2、请简述 Diff 算法的执行过程

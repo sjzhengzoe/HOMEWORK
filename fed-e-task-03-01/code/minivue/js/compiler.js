@@ -30,17 +30,25 @@ class Compiler {
       // 判断是否是指令
       let attrName = attr.name
       if (this.isDirective(attrName)) {
-        // v-text --> text
-        attrName = attrName.substr(2)
-        let key = attr.value
-        this.update(node, key, attrName)
+        if(this.isOnEvent(attrName)){
+          // v-on:click ——> on click
+          attrName = attrName.substr(2).split(":");
+          let key = attr.value
+          let type = attrName.length > 1 ? attrName[1] : '';
+          this.update(node, key, attrName[0],type)
+        }else{
+          // v-text --> text
+          attrName = attrName.substr(2)
+          let key = attr.value
+          this.update(node, key, attrName)
+        }
       }
     })
   }
 
-  update (node, key, attrName) {
+  update (node, key, attrName,type) {
     let updateFn = this[attrName + 'Updater']
-    updateFn && updateFn.call(this, node, this.vm[key], key)
+    updateFn && updateFn.call(this, node, this.vm[key], key,type)
   }
 
   // 处理 v-text 指令
@@ -59,6 +67,22 @@ class Compiler {
     // 双向绑定
     node.addEventListener('input', () => {
       this.vm[key] = node.value
+    })
+  }
+
+  // v-html
+  htmlUpdater (node, value, key) {
+    node.innerHTML = value
+    new Watcher(this.vm, key, (newValue) => {
+      node.innerHTML = newValue
+    })
+  }
+
+  // v-on
+  onUpdater (node, value, key,type) {
+    window.addEventListener(type,value);
+    new Watcher(this.vm, key, (newValue) => {
+      window.addEventListener(type,newValue);
     })
   }
 
@@ -81,6 +105,9 @@ class Compiler {
   // 判断元素属性是否是指令
   isDirective (attrName) {
     return attrName.startsWith('v-')
+  }
+  isOnEvent (attrName) {
+    return attrName.startsWith('v-on')
   }
   // 判断节点是否是文本节点
   isTextNode (node) {
