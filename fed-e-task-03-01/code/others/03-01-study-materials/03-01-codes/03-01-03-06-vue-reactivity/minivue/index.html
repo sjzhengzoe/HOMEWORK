@@ -31,9 +31,11 @@
         person: { name: 'zs' }
       }
     })
-    console.log(vm.msg)
-    // vm.msg = { test: 'Hello' }
-    vm.test = 'abc'
+    console.log(vm);
+    let newProps = {dog:{name:'liang'}}
+    let newData = {...vm.$data,...newProps};
+    vm._proxyData(newData);
+    vm.observer.walk(newData)
   </script>
 </body>
 </html>
