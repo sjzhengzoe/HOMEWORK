@@ -25,7 +25,7 @@ export default class VueRouter {
     this.options = options
     this.routeMap = {}
     this.data = _Vue.observable({
-      current: window.location.pathname
+      current: window.location.hash
     })
   }
 
@@ -79,8 +79,8 @@ export default class VueRouter {
   }
 
   initEvent () {
-    window.addEventListener('popstate', () => {
-      this.data.current = window.location.pathname
+    window.addEventListener('hashchange', () => {
+      this.data.current = window.location.hash
     })
   }
 }

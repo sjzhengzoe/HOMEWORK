@@ -12,7 +12,7 @@ const routes = [
     component: Index
   },
   {
-    path: '/blog',
+    path: '#blog',
     name: 'Blog',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -20,7 +20,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "blog" */ '../views/Blog.vue')
   },
   {
-    path: '/photo',
+    path: '#photo',
     name: 'Photo',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

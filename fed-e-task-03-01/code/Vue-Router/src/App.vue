@@ -6,8 +6,8 @@
     <div id="nav">
       <!-- 5. 创建链接 -->
       <router-link to="/">Index</router-link> |
-      <router-link to="/blog">Blog</router-link> |
-      <router-link to="/photo">Photo</router-link>
+      <router-link to="#blog">Blog</router-link> |
+      <router-link to="#photo">Photo</router-link>
     </div>
     <!-- 4. 创建路由组建的占位 -->
     <router-view/>
