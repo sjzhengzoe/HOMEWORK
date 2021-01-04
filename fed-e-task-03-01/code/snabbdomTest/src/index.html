@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snabbdom Test</title>
+    <style>
+      div {
+      }
+      button {
+        margin: 40px;
+      }
+      ul {
+      }
+      li {
+        display: flex;
+        text-align: left;
+        justify-content: space-between;
+        margin: 10px 40px 10px 0;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button id="add">增加</button>
+      <button id="sort1">正序</button>
+      <button id="sort2">反序</button>
+    </div>
+    <ul id="app"></ul>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>

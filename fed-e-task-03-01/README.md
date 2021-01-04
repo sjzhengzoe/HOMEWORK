@@ -35,3 +35,5 @@ Diff算法是对同级的节点进行比较。
 回答：代码在 code/minivue
 
 ## 3、参考 Snabbdom 提供的电影列表的示例，利用Snabbdom 实现类似的效果，如图：
+
+回答：代码在 code/snabbdomTest npm run server即可
