@@ -11,7 +11,7 @@ Vue初始化相关的实例成员、静态成员。
 new Watcher()
 调用watch实例的get方法，将watch实例入栈，并调用updateComponent，通过_render获取虚拟dom，通过_update更新到dom上。
 
-具体可看 notes/内容总结.xmind 首次渲染过程。
+具体可看 notes/内容总结.xmind Part 3· Vue.js 框架源码与进阶->首次渲染过程。
 ## 2、请简述 Vue 响应式原理。
 
 ## 3、请简述虚拟 DOM 中 Key 的作用和好处。
