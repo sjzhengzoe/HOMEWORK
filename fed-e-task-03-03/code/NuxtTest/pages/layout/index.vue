@@ -9,21 +9,28 @@
           <li class="nav-item">
             <nuxt-link class="nav-link" to="/" exact>Home</nuxt-link>
           </li>
-          <li class="nav-item">
-            <nuxt-link class="nav-link" to="editor"> <i class="ion-compose"></i>&nbsp;New Post </nuxt-link>
-          </li>
-          <li class="nav-item">
-            <nuxt-link class="nav-link" to="/settings"> <i class="ion-gear-a"></i>&nbsp;Settings </nuxt-link>
-          </li>
-          <li class="nav-item">
-            <nuxt-link class="nav-link" to="/login">Sign in</nuxt-link>
-          </li>
-          <li class="nav-item">
-            <nuxt-link class="nav-link" to="/register">Sign up</nuxt-link>
-          </li>
-          <li class="nav-item">
-            <nuxt-link class="nav-link" to="/profile"><img src="" alt="" />zhengsujie</nuxt-link>
-          </li>
+          <!-- 已登录展示 -->
+          <template v-if="user">
+            <li class="nav-item">
+              <nuxt-link class="nav-link" to="editor"> <i class="ion-compose"></i>&nbsp;New Post </nuxt-link>
+            </li>
+            <li class="nav-item">
+              <nuxt-link class="nav-link" to="/settings"> <i class="ion-gear-a"></i>&nbsp;Settings </nuxt-link>
+            </li>
+            <li class="nav-item">
+              <nuxt-link class="nav-link" to="/profile"><img :src="user.image" alt="" />{{ user.username }}</nuxt-link>
+            </li>
+          </template>
+
+          <!-- 未登录展示 -->
+          <template v-else>
+            <li class="nav-item">
+              <nuxt-link class="nav-link" to="/login">Sign in</nuxt-link>
+            </li>
+            <li class="nav-item">
+              <nuxt-link class="nav-link" to="/register">Sign up</nuxt-link>
+            </li>
+          </template>
         </ul>
       </div>
     </nav>
@@ -41,6 +48,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "LayoutIndex",
   components: {},
@@ -48,7 +57,9 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    ...mapState(["user"]),
+  },
   watch: {},
   methods: {},
   created() {},
