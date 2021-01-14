@@ -1,9 +1,44 @@
 [
   {
-    "name": "index",
     "path": "/",
-    "component": "/Users/zoe/Sites/HOMEWORK/fed-e-task-03-03/code/NuxtTest/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_7843f1ca"
+    "component": "/Users/zoe/Sites/HOMEWORK/fed-e-task-03-03/code/NuxtTest/pages/layout",
+    "children": [
+      {
+        "path": "",
+        "component": "/Users/zoe/Sites/HOMEWORK/fed-e-task-03-03/code/NuxtTest/pages/home",
+        "_name": "_43ce097f"
+      },
+      {
+        "path": "/login",
+        "component": "/Users/zoe/Sites/HOMEWORK/fed-e-task-03-03/code/NuxtTest/pages/login",
+        "_name": "_362b6ec9"
+      },
+      {
+        "path": "/register",
+        "component": "/Users/zoe/Sites/HOMEWORK/fed-e-task-03-03/code/NuxtTest/pages/login",
+        "_name": "_362b6ec9"
+      },
+      {
+        "path": "/profile/:username",
+        "component": "/Users/zoe/Sites/HOMEWORK/fed-e-task-03-03/code/NuxtTest/pages/profile",
+        "_name": "_3231b109"
+      },
+      {
+        "path": "/settings",
+        "component": "/Users/zoe/Sites/HOMEWORK/fed-e-task-03-03/code/NuxtTest/pages/settings",
+        "_name": "_b576fe7a"
+      },
+      {
+        "path": "/editor",
+        "component": "/Users/zoe/Sites/HOMEWORK/fed-e-task-03-03/code/NuxtTest/pages/editor",
+        "_name": "_fa92e3e6"
+      },
+      {
+        "path": "/article:slug",
+        "component": "/Users/zoe/Sites/HOMEWORK/fed-e-task-03-03/code/NuxtTest/pages/article",
+        "_name": "_18fbf456"
+      }
+    ],
+    "_name": "_e2f5306c"
   }
 ]
