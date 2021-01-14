@@ -40,6 +40,7 @@
 
 <script>
 import { login, register } from "@/pages/api/user.js";
+const Cookie = process.client ? require("js-cookie") : undefined;
 export default {
   name: "LoginIndex",
   components: {},
@@ -70,6 +71,11 @@ export default {
           : await register({
               user: this.user,
             });
+
+        // 存储客户端状态
+        this.$store.commit("setUser", data.user);
+        // 存储服务端状态
+        Cookie.set("user", data.user);
 
         this.$router.push("/");
       } catch (e) {
