@@ -13,11 +13,23 @@
         <div class="col-md-9">
           <div class="feed-toggle">
             <ul class="nav nav-pills outline-active">
-              <li class="nav-item">
-                <a class="nav-link disabled" href="">Your Feed</a>
+              <li class="nav-item" v-if="user">
+                <nuxt-link
+                  class="nav-link"
+                  :class="{ active: tab == 'your_feed' }"
+                  exact
+                  :to="{
+                    path: '/',
+                    query: { tag, tab: 'your_feed' },
+                  }"
+                  >Your Feed</nuxt-link
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="">Global Feed</a>
+                <nuxt-link class="nav-link" :to="{ path: '/', query: { tab: 'global_feed' } }" :class="{ active: tab == 'global_feed' }" exact>Global Feed</nuxt-link>
+              </li>
+              <li class="nav-item" v-if="tag">
+                <nuxt-link class="nav-link" :to="{ path: '/', query: { tag, tab: 'tag' } }" :class="{ active: tab == 'tag' }" exact>#{{ tag }}</nuxt-link>
               </li>
             </ul>
           </div>
@@ -44,7 +56,18 @@
           <nav>
             <ul class="pagination">
               <li class="page-item" v-for="item in totalPage" :key="item" :class="{ active: item == page }">
-                <nuxt-link class="page-link" :to="'/?page=' + item">{{ item }}</nuxt-link>
+                <nuxt-link
+                  class="page-link"
+                  :to="{
+                    path: '/',
+                    query: {
+                      page: item,
+                      tag: $route.query.tag,
+                      tab,
+                    },
+                  }"
+                  >{{ item }}</nuxt-link
+                >
               </li>
             </ul>
           </nav>
@@ -53,9 +76,22 @@
         <div class="col-md-3">
           <div class="sidebar">
             <p>Popular Tags</p>
-
+            <!-- 标签 -->
             <div class="tag-list">
-              <nuxt-link to="/" v-for="tag in tags" :key="tag" class="tag-pill tag-default">{{ tag }}</nuxt-link>
+              <nuxt-link
+                :to="{
+                  path: '/',
+                  query: {
+                    tab: 'tag',
+                    page: $route.query.page,
+                    tag,
+                  },
+                }"
+                v-for="tag in tags"
+                :key="tag"
+                class="tag-pill tag-default"
+                >{{ tag }}</nuxt-link
+              >
             </div>
           </div>
         </div>
@@ -65,30 +101,33 @@
 </template>
 
 <script>
-import { getArticles } from "@/pages/api/article.js";
+import { getArticles, getYourFeedArticles } from "@/pages/api/article.js";
 import { getTags } from "@/pages/api/tag.js";
+import { mapState } from "vuex";
 export default {
   name: "HomeIndex",
   components: {},
   props: {},
-  async asyncData({ query }) {
+  async asyncData({ query, store }) {
     let limit = 2;
-    let page = Number.parseInt(query.page || 1);
+    let { tag, page = 1, tab = "global_feed" } = query;
+    let getDataFun = store.state.user && tab == "your_feed" ? getYourFeedArticles : getArticles;
 
     const [articlesData, tagData] = await Promise.all([
       // 获取页面列表数据
-      getArticles({
+      getDataFun({
         limit,
         offset: (page - 1) * limit,
+        tag,
       }),
       // 获取标签数据
       getTags(),
     ]);
     const { tags } = tagData.data;
 
-    return { ...articlesData.data, limit, page, tags };
+    return { ...articlesData.data, limit, tags, tag, page, tab };
   },
-  watchQuery: ["page"],
+  watchQuery: ["page", "tag", "tab"],
   data() {
     return {
       articles: [],
@@ -99,6 +138,7 @@ export default {
     totalPage() {
       return Math.ceil(this.articlesCount / this.limit);
     },
+    ...mapState(["user"]),
   },
   watch: {},
   methods: {},
