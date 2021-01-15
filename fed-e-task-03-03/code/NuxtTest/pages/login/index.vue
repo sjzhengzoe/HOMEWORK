@@ -43,6 +43,7 @@ import { login, register } from "@/pages/api/user.js";
 const Cookie = process.client ? require("js-cookie") : undefined;
 export default {
   name: "LoginIndex",
+  middleware: "notAuthenticated",
   components: {},
   props: {},
   data() {
