@@ -43,7 +43,9 @@
                 <nuxt-link :to="'profile/' + article.author.username" class="author">{{ article.author.username }}</nuxt-link>
                 <span class="date">{{ article.createdAt | date("MMM DD,YYYY") }}</span>
               </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right" :class="{ active: article.favorited }"><i class="ion-heart"></i> {{ article.favoritesCount }}</button>
+              <button @click="onFavorite(article)" :disabled="article.favoriteDisabled" class="btn btn-outline-primary btn-sm pull-xs-right" :class="{ active: article.favorited }">
+                <i class="ion-heart"></i> {{ article.favoritesCount }}
+              </button>
             </div>
             <nuxt-link :to="'profile/' + article.author.username" class="preview-link">
               <h1>{{ article.title }}</h1>
@@ -101,7 +103,7 @@
 </template>
 
 <script>
-import { getArticles, getYourFeedArticles } from "@/pages/api/article.js";
+import { getArticles, getYourFeedArticles, addFavorite, deleteFavorite } from "@/pages/api/article.js";
 import { getTags } from "@/pages/api/tag.js";
 import { mapState } from "vuex";
 export default {
@@ -124,6 +126,10 @@ export default {
       getTags(),
     ]);
     const { tags } = tagData.data;
+    const { articles } = articlesData.data;
+    articles.forEach((article) => {
+      article.favoriteDisabled = false;
+    });
 
     return { ...articlesData.data, limit, tags, tag, page, tab };
   },
@@ -141,7 +147,23 @@ export default {
     ...mapState(["user"]),
   },
   watch: {},
-  methods: {},
+  methods: {
+    async onFavorite(article) {
+      article.favoriteDisabled = true;
+      if (article.favorited) {
+        // 取消点赞
+        await deleteFavorite(article.slug);
+        article.favorited = false;
+        article.favoritesCount += -1;
+      } else {
+        // 点赞
+        await addFavorite(article.slug);
+        article.favorited = true;
+        article.favoritesCount += 1;
+      }
+      article.favoriteDisabled = false;
+    },
+  },
   created() {},
   mounted() {},
 };

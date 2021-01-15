@@ -7,13 +7,11 @@ export const request = axios.create({
 
 // 通过插件机制获取到上下文 query params req res
 export default ({ store }) => {
-  console.log("sujie", store);
   // 请求拦截器
   // 任何请求都要经过请求拦截器
   // 我们可以在请求拦截器中做一些公共的业务处理，例如统一设置 token
   request.interceptors.request.use(
     function(config) {
-      console.log("sujie");
       const { user } = store.state;
       // 设置 config
       if (user && user.token) {
