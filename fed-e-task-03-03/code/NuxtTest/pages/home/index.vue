@@ -39,6 +39,15 @@
               <span>Read more...</span>
             </nuxt-link>
           </div>
+
+          <!-- 页码 -->
+          <nav>
+            <ul class="pagination">
+              <li class="page-item" v-for="item in totalPage" :key="item" :class="{ active: item == page }">
+                <nuxt-link class="page-link" :to="'/?page=' + item">{{ item }}</nuxt-link>
+              </li>
+            </ul>
+          </nav>
         </div>
 
         <div class="col-md-3">
@@ -46,14 +55,7 @@
             <p>Popular Tags</p>
 
             <div class="tag-list">
-              <a href="" class="tag-pill tag-default">programming</a>
-              <a href="" class="tag-pill tag-default">javascript</a>
-              <a href="" class="tag-pill tag-default">emberjs</a>
-              <a href="" class="tag-pill tag-default">angularjs</a>
-              <a href="" class="tag-pill tag-default">react</a>
-              <a href="" class="tag-pill tag-default">mean</a>
-              <a href="" class="tag-pill tag-default">node</a>
-              <a href="" class="tag-pill tag-default">rails</a>
+              <nuxt-link to="/" v-for="tag in tags" :key="tag" class="tag-pill tag-default">{{ tag }}</nuxt-link>
             </div>
           </div>
         </div>
@@ -64,21 +66,36 @@
 
 <script>
 import { getArticles } from "@/pages/api/article.js";
+import { getTags } from "@/pages/api/tag.js";
 export default {
   name: "HomeIndex",
   components: {},
   props: {},
-  async asyncData() {
-    const { data } = await getArticles();
-    return data;
+  async asyncData({ query }) {
+    let limit = 2;
+    let page = Number.parseInt(query.page || 1);
+
+    const { data } = await getArticles({
+      limit,
+      offset: (page - 1) * limit,
+    });
+
+    const tagData = await getTags();
+
+    return { ...data, limit, page, tags: tagData.data.tags };
   },
+  watchQuery: ["page"],
   data() {
     return {
       articles: [],
       articlesCount: [],
     };
   },
-  computed: {},
+  computed: {
+    totalPage() {
+      return Math.ceil(this.articlesCount / this.limit);
+    },
+  },
   watch: {},
   methods: {},
   created() {},
