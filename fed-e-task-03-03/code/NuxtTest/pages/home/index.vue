@@ -75,14 +75,18 @@ export default {
     let limit = 2;
     let page = Number.parseInt(query.page || 1);
 
-    const { data } = await getArticles({
-      limit,
-      offset: (page - 1) * limit,
-    });
+    const [articlesData, tagData] = await Promise.all([
+      // 获取页面列表数据
+      getArticles({
+        limit,
+        offset: (page - 1) * limit,
+      }),
+      // 获取标签数据
+      getTags(),
+    ]);
+    const { tags } = tagData.data;
 
-    const tagData = await getTags();
-
-    return { ...data, limit, page, tags: tagData.data.tags };
+    return { ...articlesData.data, limit, page, tags };
   },
   watchQuery: ["page"],
   data() {
