@@ -36,7 +36,7 @@ export default {
                 component: resolve(__dirname, "pages/editor/"),
               },
               {
-                path: "/article:slug",
+                path: "/article/:slug",
                 component: resolve(__dirname, "pages/article/"),
               },
             ],
