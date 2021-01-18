@@ -5,22 +5,7 @@
       <div class="container">
         <h1>{{ article.title }}</h1>
 
-        <div class="article-meta">
-          <a href=""><img src="http://i.imgur.com/Qr71crq.jpg"/></a>
-          <div class="info">
-            <a href="" class="author">Eric Simons</a>
-            <span class="date">January 20th</span>
-          </div>
-          <button class="btn btn-sm btn-outline-secondary">
-            <i class="ion-plus-round"></i>
-            &nbsp; Follow Eric Simons <span class="counter">(10)</span>
-          </button>
-          &nbsp;&nbsp;
-          <button class="btn btn-sm btn-outline-primary">
-            <i class="ion-heart"></i>
-            &nbsp; Favorite Post <span class="counter">(29)</span>
-          </button>
-        </div>
+        <acticle-meta :article="article" />
       </div>
     </div>
 
@@ -32,25 +17,8 @@
       <hr />
 
       <div class="article-actions">
-        <div class="article-meta">
-          <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg"/></a>
-          <div class="info">
-            <a href="" class="author">Eric Simons</a>
-            <span class="date">January 20th</span>
-          </div>
-
-          <button class="btn btn-sm btn-outline-secondary">
-            <i class="ion-plus-round"></i>
-            &nbsp; Follow Eric Simons <span class="counter">(10)</span>
-          </button>
-          &nbsp;
-          <button class="btn btn-sm btn-outline-primary">
-            <i class="ion-heart"></i>
-            &nbsp; Favorite Post <span class="counter">(29)</span>
-          </button>
-        </div>
+        <acticle-meta :article="article" />
       </div>
-
       <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
           <form class="card comment-form">
@@ -105,13 +73,29 @@
 <script>
 import { getArticle, getComments } from "@/pages/api/article.js";
 import MarkdownIt from "markdown-it";
+import ActicleMeta from "./components";
 
 export default {
   name: "ArticleIndex",
-  components: {},
+  components: {
+    ActicleMeta,
+  },
   props: {},
   data() {
     return {};
+  },
+  head() {
+    return {
+      title: `${this.article.title} - RealWorld`,
+      meta: [
+        {
+          // 避免子组件不能正确覆盖父组件
+          hid: "description",
+          name: "description",
+          content: this.article.description,
+        },
+      ],
+    };
   },
   async asyncData({ params }) {
     const { data } = await getArticle(params.slug);
