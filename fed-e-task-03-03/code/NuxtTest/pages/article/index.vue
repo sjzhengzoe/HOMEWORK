@@ -26,9 +26,7 @@
 
     <div class="container page">
       <div class="row article-content">
-        <div class="col-md-12">
-          {{ article.body }}
-        </div>
+        <div class="col-md-12" v-html="article.body"></div>
       </div>
 
       <hr />
@@ -106,6 +104,8 @@
 
 <script>
 import { getArticle, getComments } from "@/pages/api/article.js";
+import MarkdownIt from "markdown-it";
+
 export default {
   name: "ArticleIndex",
   components: {},
@@ -115,7 +115,10 @@ export default {
   },
   async asyncData({ params }) {
     const { data } = await getArticle(params.slug);
-    return { article: data.article };
+    const { article } = data;
+    const md = new MarkdownIt();
+    article.body = md.render(article.body);
+    return { article };
   },
   computed: {},
   watch: {},
