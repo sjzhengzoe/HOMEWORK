@@ -1,6 +1,10 @@
 export default {
   router: {
     linkActiveClass: "active",
+    server: {
+      host: "0.0.0.0",
+      port: "3000",
+    },
     extendRoutes(routes, resolve) {
       // 清除默认生成的路由表
       // routes.splice(0);
