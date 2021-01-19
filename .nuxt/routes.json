@@ -1,0 +1,44 @@
+[
+  {
+    "path": "/",
+    "component": "/Users/zoe/Sites/HOMEWORK/pages/layout",
+    "children": [
+      {
+        "path": "",
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/home",
+        "_name": "_d0385cb2"
+      },
+      {
+        "path": "/login",
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/login",
+        "_name": "_64ceaba1"
+      },
+      {
+        "path": "/register",
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/login",
+        "_name": "_64ceaba1"
+      },
+      {
+        "path": "/profile/:username",
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/profile",
+        "_name": "_44f917e1"
+      },
+      {
+        "path": "/settings",
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/settings",
+        "_name": "_292c162a"
+      },
+      {
+        "path": "/editor",
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/editor",
+        "_name": "_287aec35"
+      },
+      {
+        "path": "/article/:slug",
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/article",
+        "_name": "_2bc35b2e"
+      }
+    ],
+    "_name": "_3449c5f2"
+  }
+]
