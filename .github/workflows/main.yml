@@ -16,10 +16,9 @@ jobs:
     # 打包构建
     - name: Build
       uses: actions/setup-node@master
-    - run: cd fed-e-task-03-03/code/NuxtTest
     - run: npm install
     - run: npm run build
-    - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json
+    - run: tar -zcvf release.tgz fed-e-task-03-03/code/NuxtTest/.nuxt fed-e-task-03-03/code/NuxtTest/static fed-e-task-03-03/code/NuxtTest/nuxt.config.js fed-e-task-03-03/code/NuxtTest/package.json fed-e-task-03-03/code/NuxtTest/package-lock.json fed-e-task-03-03/code/NuxtTest/pm2.config.json
 
     # 发布 Release
     - name: Create Release
