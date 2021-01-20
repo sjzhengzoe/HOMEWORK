@@ -51,6 +51,10 @@ export const routerOptions = {
       path: "/editor",
       component: _287aec35
     }, {
+      path: "/editor/:slug",
+      component: _287aec35,
+      name: "editors"
+    }, {
       path: "/article/:slug",
       component: _2bc35b2e,
       name: "article"

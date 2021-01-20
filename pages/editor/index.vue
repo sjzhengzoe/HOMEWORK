@@ -45,7 +45,7 @@
                 />
                 <div class="tag-list">
                   <span class="tag-default tag-pill" v-for="tag in article.tagList" :key="tag">
-                    <i class="ion-close-round"></i>
+                    <i class="ion-close-round" v-on:click="deleTage(tag)"></i>
                     {{ tag }}
                   </span>
                 </div>
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { addArticle } from "@/pages/api/article.js";
+import { addArticle, getArticle, updateArticle } from "@/pages/api/article.js";
 
 export default {
   name: "EditorIndex",
@@ -86,16 +86,28 @@ export default {
       },
     };
   },
+
   computed: {},
   watch: {},
   methods: {
+    deleTage(tag) {
+      let taglist = this.article.tagList;
+      let newdata = taglist.filter((item) => item != tag);
+      this.article.tagList = newdata;
+    },
     addTag() {
       this.article.tagList.push(this.nowTag);
       this.nowTag = "";
     },
     async addArticleAction() {
       try {
-        let res = await addArticle({ ...this.article });
+        let res;
+        if (this.$route.params.slug) {
+          res = await updateArticle({ article: this.article });
+        } else {
+          res = await addArticle({ article: this.article });
+        }
+
         this.$router.push({ name: "article", params: { slug: res.data.article.slug } });
       } catch (e) {
         this.errors = e.response.data.errors;
@@ -103,7 +115,16 @@ export default {
     },
   },
   created() {},
-  mounted() {},
+  async mounted() {
+    if (this.$route.params.slug) {
+      const res = await getArticle(this.$route.params.slug);
+      const article = res.data.article;
+      this.article.title = article.title || "";
+      this.article.description = article.description || "";
+      this.article.body = article.body || "";
+      this.article.tagList = article.tagList || [];
+    }
+  },
 };
 </script>
 <style scoped></style>

@@ -30,7 +30,14 @@
         "_name": "_292c162a"
       },
       {
+        "namr": "editor",
         "path": "/editor",
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/editor",
+        "_name": "_287aec35"
+      },
+      {
+        "name": "editors",
+        "path": "/editor/:slug",
         "component": "/Users/zoe/Sites/HOMEWORK/pages/editor",
         "_name": "_287aec35"
       },

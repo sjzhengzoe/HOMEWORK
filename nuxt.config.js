@@ -34,7 +34,13 @@ export default {
                 component: resolve(__dirname, "pages/settings/"),
               },
               {
+                namr: "editor",
                 path: "/editor",
+                component: resolve(__dirname, "pages/editor/"),
+              },
+              {
+                name: "editors",
+                path: "/editor/:slug",
                 component: resolve(__dirname, "pages/editor/"),
               },
               {

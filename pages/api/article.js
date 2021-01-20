@@ -34,14 +34,6 @@ export const deleteFavorite = (slug) => {
   });
 };
 
-// 获取文章详情
-export const getArticle = (slug) => {
-  return request({
-    method: "GET",
-    url: `/api/articles/${slug}`,
-  });
-};
-
 // 获取文章评论
 export const getComments = (slug) => {
   return request({
@@ -56,6 +48,31 @@ export const setComments = (slug, data) => {
     method: "POST",
     url: `/api/articles/${slug}/comments`,
     data,
+  });
+};
+
+// 获取文章
+export const getArticle = (slug) => {
+  return request({
+    method: "GET",
+    url: `/api/articles/${slug}`,
+  });
+};
+
+// 更新文章
+export const updateArticle = (data, slug) => {
+  return request({
+    method: "PUT",
+    url: `/api/articles/${slug}`,
+    data,
+  });
+};
+
+// 删除文章
+export const deleteArticle = (slug) => {
+  return request({
+    method: "DELETE",
+    url: `/api/articles/${slug}`,
   });
 };
 

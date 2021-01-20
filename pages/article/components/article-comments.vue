@@ -68,8 +68,8 @@ export default {
   },
   created() {},
   async mounted() {
-    const { data } = await getComments(this.article.slug);
-    this.comments = data.comments;
+    const res = await getComments(this.article.slug);
+    this.comments = res.data.comments;
   },
 };
 </script>

@@ -5,7 +5,7 @@
       <div class="container">
         <h1>{{ article.title }}</h1>
 
-        <acticle-meta :article="article" />
+        <acticle-meta :article="article" :isSelf="isSelf" />
       </div>
     </div>
 
@@ -14,10 +14,16 @@
         <div class="col-md-12" v-html="article.body"></div>
       </div>
 
+      <ul class="tag-list">
+        <li v-for="tag in article.tagList" :key="tag" class="tag-default tag-pill tag-outline ">
+          {{ tag }}
+        </li>
+      </ul>
+
       <hr />
 
       <div class="article-actions">
-        <acticle-meta :article="article" />
+        <acticle-meta :article="article" :isSelf="isSelf" />
       </div>
       <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
@@ -57,17 +63,14 @@ export default {
       ],
     };
   },
-  async asyncData({ params, store, router }) {
+  async asyncData({ params, store, redirect }) {
     const { data } = await getArticle(params.slug);
     const { article } = data;
-
-    if (store.state.user.username === article.author.username) {
-      console.log(router);
-    } else {
-      const md = new MarkdownIt();
-      article.body = md.render(article.body);
-      return { article };
-    }
+    const isSelf = store.state.user.username === article.author.username;
+    console.log("sujie", isSelf);
+    const md = new MarkdownIt();
+    article.body = md.render(article.body);
+    return { article, isSelf };
   },
   computed: {},
   watch: {},

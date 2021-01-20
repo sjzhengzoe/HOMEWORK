@@ -18,7 +18,25 @@
       <span class="date">{{ article.createdAt | date("MMM DD,YYYY") }}</span>
     </div>
 
+    <!-- 编辑 -->
+    <nuxt-link
+      v-if="isSelf"
+      class="btn btn-outline-secondary btn-sm"
+      :to="{ name: 'editors', params: { slug: article.slug } }"
+    >
+      <i class="ion-edit"></i> Edit Article &nbsp;
+    </nuxt-link>
+    &nbsp;
+
+    <!-- 删除 -->
+    <button v-if="isSelf" class="btn btn-outline-danger btn-sm" v-on:click="deleArticleData">
+      <i class="ion-trash-a"></i>
+      &nbsp; Delete Article
+    </button>
+
+    <!-- 关注 -->
     <button
+      v-if="!isSelf"
       class="btn btn-sm btn-outline-secondary"
       :class="{ active: article.author.following }"
       v-on:click="followOrDeleteUser"
@@ -27,7 +45,10 @@
       &nbsp; {{ article.author.following ? "Unfollow" : "Follow" }} {{ article.author.username }}
     </button>
     &nbsp;
+
+    <!-- 喜欢 -->
     <button
+      v-if="!isSelf"
       @click="onFavorite(article)"
       :disabled="article.favoriteDisabled"
       class="btn btn-sm btn-outline-primary"
@@ -47,7 +68,7 @@ import {
   deleteFavorite,
 } from "@/pages/api/article.js";
 import { followUser, deleteFollowUser } from "@/pages/api/profile.js";
-import { getArticle } from "@/pages/api/article.js";
+import { getArticle, deleteArticle } from "@/pages/api/article.js";
 export default {
   name: "ActicleMeta",
   components: {},
@@ -55,6 +76,10 @@ export default {
     article: {
       type: Object,
       required: true,
+    },
+    isSelf: {
+      type: Boolean,
+      require: true,
     },
   },
   data() {
@@ -83,6 +108,10 @@ export default {
         article.favoritesCount += 1;
       }
       article.favoriteDisabled = false;
+    },
+    async deleArticleData() {
+      await deleteArticle(this.article.slug);
+      this.$router.push("/");
     },
   },
   created() {},

@@ -12,13 +12,21 @@
           <!-- 已登录展示 -->
           <template v-if="user">
             <li class="nav-item">
-              <nuxt-link class="nav-link" to="editor"> <i class="ion-compose"></i>&nbsp;New Post </nuxt-link>
+              <nuxt-link class="nav-link" to="editor">
+                <i class="ion-compose"></i>&nbsp;New Post
+              </nuxt-link>
             </li>
             <li class="nav-item">
-              <nuxt-link class="nav-link" to="/settings"> <i class="ion-gear-a"></i>&nbsp;Settings </nuxt-link>
+              <nuxt-link class="nav-link" to="/settings">
+                <i class="ion-gear-a"></i>&nbsp;Settings
+              </nuxt-link>
             </li>
             <li class="nav-item">
-              <nuxt-link class="nav-link" to="/profile"><img class="user-pic" :src="user.image" alt="" />{{ user.username }}</nuxt-link>
+              <nuxt-link
+                class="nav-link"
+                :to="{ name: 'profile', params: { username: user.username } }"
+                ><img class="user-pic" :src="user.image" alt="" />{{ user.username }}</nuxt-link
+              >
             </li>
           </template>
 
@@ -41,7 +49,10 @@
     <footer>
       <div class="container">
         <a href="/" class="logo-font">conduit</a>
-        <span class="attribution"> An interactive learning project from <a href="https://thinkster.io">Thinkster</a>. Code &amp; design licensed under MIT. </span>
+        <span class="attribution">
+          An interactive learning project from <a href="https://thinkster.io">Thinkster</a>. Code
+          &amp; design licensed under MIT.
+        </span>
       </div>
     </footer>
   </div>
