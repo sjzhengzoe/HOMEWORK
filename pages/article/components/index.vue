@@ -5,8 +5,10 @@
       :to="{
         path: `/profile/${article.author.username}`,
       }"
-      ><img :src="article.author.image"
-    /></nuxt-link>
+    >
+      <img :src="article.author.image" />
+    </nuxt-link>
+
     <div class="info">
       <nuxt-link
         :to="{
@@ -18,7 +20,6 @@
       <span class="date">{{ article.createdAt | date("MMM DD,YYYY") }}</span>
     </div>
 
-    <!-- 编辑 -->
     <nuxt-link
       v-if="isSelf"
       class="btn btn-outline-secondary btn-sm"
@@ -28,13 +29,11 @@
     </nuxt-link>
     &nbsp;
 
-    <!-- 删除 -->
     <button v-if="isSelf" class="btn btn-outline-danger btn-sm" v-on:click="deleArticleData">
       <i class="ion-trash-a"></i>
       &nbsp; Delete Article
     </button>
 
-    <!-- 关注 -->
     <button
       v-if="!isSelf"
       class="btn btn-sm btn-outline-secondary"
@@ -46,7 +45,6 @@
     </button>
     &nbsp;
 
-    <!-- 喜欢 -->
     <button
       v-if="!isSelf"
       @click="onFavorite(article)"

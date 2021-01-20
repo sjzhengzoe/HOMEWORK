@@ -103,7 +103,7 @@ export default {
       try {
         let res;
         if (this.$route.params.slug) {
-          res = await updateArticle({ article: this.article });
+          res = await updateArticle({ article: this.article }, this.$route.params.slug);
         } else {
           res = await addArticle({ article: this.article });
         }
