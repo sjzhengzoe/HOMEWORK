@@ -48,7 +48,7 @@
 import { update } from "@/pages/api/user.js";
 const Cookie = process.client ? require("js-cookie") : undefined;
 import Vue from "Vue";
-import { mapMutations, mapState } from "Vuex";
+import { mapMutations } from "Vuex";
 export default {
   name: "SettingsIndex",
   // 在路由匹配组件渲染之前会先执行中间件处理
@@ -73,12 +73,9 @@ export default {
   methods: {
     ...mapMutations(["setUser"]),
     exit() {
-      // console.log($store);
-      // Cookie.remove("user");
-      // console.log(Cookie.get("user"));
-      // this.$store.commit.setUser([]);
-      // this.$router.push("/");
-      // setUser(null);
+      this.setUser(null);
+      Cookie.remove("user");
+      this.$router.push("/");
     },
     async submit() {
       let { email, bio, image, password, username } = this.userinfo;
@@ -88,13 +85,12 @@ export default {
       }
       try {
         const res = await update({ user: params });
-        const { user } = res;
-        this.userinfo = user;
-        this.userinfo.email = user.email;
-        this.userinfo.bio = user.bio;
-        this.userinfo.image = user.image;
-        this.userinfo.username = user.username;
-        this.errors = {};
+        const { user } = res.data;
+        // 更新store
+        this.setUser(user);
+        // 更新服务器
+        Cookie.set("user", user);
+        this.$router.push(`/profile/${user.username}`);
       } catch (error) {
         this.errors = error.response.data.errors;
       }

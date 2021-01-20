@@ -15,7 +15,14 @@ export const register = (data) =>
     url: "/api/users",
     data,
   });
+// 获取用户数据
+export const getuser = () =>
+  request({
+    method: "GET",
+    url: "/api/user",
+  });
 
+// 更新用户数据
 export const update = (data) =>
   request({
     method: "PUT",
