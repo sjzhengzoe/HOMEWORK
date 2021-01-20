@@ -1,10 +1,7 @@
 export default {
   router: {
     linkActiveClass: "active",
-    server: {
-      host: "0.0.0.0",
-      port: "3000",
-    },
+
     extendRoutes(routes, resolve) {
       // 清除默认生成的路由表
       // routes.splice(0);
@@ -28,6 +25,7 @@ export default {
                 component: resolve(__dirname, "pages/login/"),
               },
               {
+                name: "profile",
                 path: "/profile/:username",
                 component: resolve(__dirname, "pages/profile/"),
               },
@@ -36,10 +34,17 @@ export default {
                 component: resolve(__dirname, "pages/settings/"),
               },
               {
+                namr: "editor",
                 path: "/editor",
                 component: resolve(__dirname, "pages/editor/"),
               },
               {
+                name: "editors",
+                path: "/editor/:slug",
+                component: resolve(__dirname, "pages/editor/"),
+              },
+              {
+                name: "article",
                 path: "/article/:slug",
                 component: resolve(__dirname, "pages/article/"),
               },
@@ -48,6 +53,10 @@ export default {
         ]
       );
     },
+  },
+  server: {
+    host: "0.0.0.0",
+    port: "3000",
   },
   // 注册插件
   plugins: ["~/plugins/request.js", "~/plugins/dayjs.js"],

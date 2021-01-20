@@ -3,11 +3,16 @@
   <div>
     <form class="card comment-form">
       <div class="card-block">
-        <textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
+        <textarea
+          class="form-control"
+          placeholder="Write a comment..."
+          rows="3"
+          v-model="comment"
+        ></textarea>
       </div>
       <div class="card-footer">
         <img :src="article.author.image" class="comment-author-img" />
-        <button class="btn btn-sm btn-primary">
+        <button class="btn btn-sm btn-primary" type="button" v-on:click="setComment">
           Post Comment
         </button>
       </div>
@@ -35,7 +40,7 @@
 </template>
 
 <script>
-import { getComments } from "@/pages/api/article.js";
+import { getComments, setComments } from "@/pages/api/article.js";
 
 export default {
   name: "ArticleComments",
@@ -48,16 +53,23 @@ export default {
   },
   data() {
     return {
+      comment: "",
       comments: [],
     };
   },
   computed: {},
   watch: {},
-  methods: {},
+  methods: {
+    async setComment() {
+      let res = await setComments(this.article.slug, { comment: { body: this.comment } });
+      this.comment = "";
+      this.comments.unshift(res.data.comment);
+    },
+  },
   created() {},
   async mounted() {
-    const { data } = await getComments(this.article.slug);
-    this.comments = data.comments;
+    const res = await getComments(this.article.slug);
+    this.comments = res.data.comments;
   },
 };
 </script>

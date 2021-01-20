@@ -1,26 +1,32 @@
 {
-  "name": "NuxtTest",
+  "name": "HOMEWORK",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "nuxt.config.js",
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nuxt",
-    "build":"nuxt build",
-    "start":"nuxt start"
+    "build": "nuxt build",
+    "start": "nuxt start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjzhengzoe/HOMEWORK.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "nuxt": "^2.14.12"
+  "bugs": {
+    "url": "https://github.com/sjzhengzoe/HOMEWORK/issues"
   },
+  "homepage": "https://github.com/sjzhengzoe/HOMEWORK#readme",
   "dependencies": {
+    "nuxt": "^2.14.12",
     "axios": "^0.21.1",
     "cookieparser": "^0.1.0",
     "dayjs": "^1.10.3",
     "js-cookie": "^2.2.1",
-    "markdown-it": "^12.0.4",
-    "nodemon": "^2.0.7"
+    "markdown-it": "^12.0.4"
   }
 }
