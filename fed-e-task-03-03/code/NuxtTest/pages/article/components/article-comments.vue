@@ -57,7 +57,6 @@ export default {
   created() {},
   async mounted() {
     const { data } = await getComments(this.article.slug);
-    console.log("sujie", data);
     this.comments = data.comments;
   },
 };

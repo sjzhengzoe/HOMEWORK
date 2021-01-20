@@ -67,7 +67,6 @@ export default {
     const { data } = await getArticle(params.slug);
     const { article } = data;
     const isSelf = store.state.user.username === article.author.username;
-    console.log("sujie", isSelf);
     const md = new MarkdownIt();
     article.body = md.render(article.body);
     return { article, isSelf };
