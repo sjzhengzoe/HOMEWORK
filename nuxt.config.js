@@ -1,10 +1,7 @@
 export default {
   router: {
     linkActiveClass: "active",
-    server: {
-      host: "0.0.0.0",
-      port: "3000",
-    },
+
     extendRoutes(routes, resolve) {
       // 清除默认生成的路由表
       // routes.splice(0);
@@ -48,6 +45,10 @@ export default {
         ]
       );
     },
+  },
+  server: {
+    host: "0.0.0.0",
+    port: "3000",
   },
   // 注册插件
   plugins: ["~/plugins/request.js", "~/plugins/dayjs.js"],
