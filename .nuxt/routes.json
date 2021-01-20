@@ -16,6 +16,7 @@
         "component": "/Users/zoe/Sites/HOMEWORK/pages/login"
       },
       {
+        "name": "profile",
         "path": "/profile/:username",
         "component": "/Users/zoe/Sites/HOMEWORK/pages/profile"
       },

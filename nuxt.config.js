@@ -25,6 +25,7 @@ export default {
                 component: resolve(__dirname, "pages/login/"),
               },
               {
+                name: "profile",
                 path: "/profile/:username",
                 component: resolve(__dirname, "pages/profile/"),
               },

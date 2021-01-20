@@ -15,19 +15,44 @@
           <form v-on:submit.prevent="submit">
             <fieldset>
               <fieldset class="form-group">
-                <input class="form-control" type="text" placeholder="URL of profile picture" v-model="userinfo.image" />
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="URL of profile picture"
+                  v-model="userinfo.image"
+                />
               </fieldset>
               <fieldset class="form-group">
-                <input class="form-control form-control-lg" type="text" placeholder="Your Name" v-model="userinfo.username" />
+                <input
+                  class="form-control form-control-lg"
+                  type="text"
+                  placeholder="Your Name"
+                  v-model="userinfo.username"
+                />
               </fieldset>
               <fieldset class="form-group">
-                <textarea class="form-control form-control-lg" rows="8" placeholder="Short bio about you" v-model="userinfo.bio"></textarea>
+                <textarea
+                  class="form-control form-control-lg"
+                  rows="8"
+                  placeholder="Short bio about you"
+                  v-model="userinfo.bio"
+                ></textarea>
               </fieldset>
               <fieldset class="form-group">
-                <input class="form-control form-control-lg" type="text" placeholder="Email" v-model="userinfo.email" />
+                <input
+                  class="form-control form-control-lg"
+                  type="text"
+                  placeholder="Email"
+                  v-model="userinfo.email"
+                />
               </fieldset>
               <fieldset class="form-group">
-                <input class="form-control form-control-lg" type="password" placeholder="Password" v-model="userinfo.password" />
+                <input
+                  class="form-control form-control-lg"
+                  type="password"
+                  placeholder="Password"
+                  v-model="userinfo.password"
+                />
               </fieldset>
               <button class="btn btn-lg btn-primary pull-xs-right">
                 Update Settings
@@ -90,7 +115,7 @@ export default {
         this.setUser(user);
         // 更新服务器
         Cookie.set("user", user);
-        this.$router.push(`/profile/${user.username}`);
+        this.$router.push({ path: `/profile/${user.username}` });
       } catch (error) {
         this.errors = error.response.data.errors;
       }
