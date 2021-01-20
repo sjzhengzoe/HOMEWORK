@@ -52,7 +52,8 @@ export const routerOptions = {
       component: _287aec35
     }, {
       path: "/article/:slug",
-      component: _2bc35b2e
+      component: _2bc35b2e,
+      name: "article"
     }]
   }],
 

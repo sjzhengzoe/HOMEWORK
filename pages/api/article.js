@@ -49,3 +49,12 @@ export const getComments = (slug) => {
     url: `/api/articles/${slug}/comments`,
   });
 };
+
+// 添加文章
+export const addArticle = (data) => {
+  return request({
+    method: "POST",
+    url: `/api/articles`,
+    data,
+  });
+};

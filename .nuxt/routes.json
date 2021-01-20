@@ -5,33 +5,42 @@
     "children": [
       {
         "path": "",
-        "component": "/Users/zoe/Sites/HOMEWORK/pages/home"
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/home",
+        "_name": "_d0385cb2"
       },
       {
         "path": "/login",
-        "component": "/Users/zoe/Sites/HOMEWORK/pages/login"
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/login",
+        "_name": "_64ceaba1"
       },
       {
         "path": "/register",
-        "component": "/Users/zoe/Sites/HOMEWORK/pages/login"
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/login",
+        "_name": "_64ceaba1"
       },
       {
         "name": "profile",
         "path": "/profile/:username",
-        "component": "/Users/zoe/Sites/HOMEWORK/pages/profile"
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/profile",
+        "_name": "_44f917e1"
       },
       {
         "path": "/settings",
-        "component": "/Users/zoe/Sites/HOMEWORK/pages/settings"
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/settings",
+        "_name": "_292c162a"
       },
       {
         "path": "/editor",
-        "component": "/Users/zoe/Sites/HOMEWORK/pages/editor"
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/editor",
+        "_name": "_287aec35"
       },
       {
+        "name": "article",
         "path": "/article/:slug",
-        "component": "/Users/zoe/Sites/HOMEWORK/pages/article"
+        "component": "/Users/zoe/Sites/HOMEWORK/pages/article",
+        "_name": "_2bc35b2e"
       }
-    ]
+    ],
+    "_name": "_3449c5f2"
   }
 ]
