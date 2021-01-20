@@ -57,12 +57,17 @@ export default {
       ],
     };
   },
-  async asyncData({ params }) {
+  async asyncData({ params, store, router }) {
     const { data } = await getArticle(params.slug);
     const { article } = data;
-    const md = new MarkdownIt();
-    article.body = md.render(article.body);
-    return { article };
+
+    if (store.state.user.username === article.author.username) {
+      console.log(router);
+    } else {
+      const md = new MarkdownIt();
+      article.body = md.render(article.body);
+      return { article };
+    }
   },
   computed: {},
   watch: {},

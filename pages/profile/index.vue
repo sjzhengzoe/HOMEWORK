@@ -74,7 +74,9 @@
           <!-- 文章列表 -->
           <div v-for="(article, index) in articlesData" :key="index" class="article-preview">
             <div class="article-meta">
-              <a href=""><img :src="article.author.image"/></a>
+              <nuxt-link :to="{ name: 'profile', params: { username: article.author.username } }"
+                ><img :src="article.author.image"
+              /></nuxt-link>
               <div class="info">
                 <nuxt-link
                   exact
@@ -95,7 +97,7 @@
             </div>
             <nuxt-link
               exact
-              :to="{ name: 'profile', params: { username: article.author.username } }"
+              :to="{ name: 'article', params: { slug: article.slug } }"
               class="preview-link"
             >
               <h1>{{ article.title }}</h1>

@@ -50,6 +50,15 @@ export const getComments = (slug) => {
   });
 };
 
+// 设置文章评论
+export const setComments = (slug, data) => {
+  return request({
+    method: "POST",
+    url: `/api/articles/${slug}/comments`,
+    data,
+  });
+};
+
 // 添加文章
 export const addArticle = (data) => {
   return request({
