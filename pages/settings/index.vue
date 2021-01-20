@@ -72,7 +72,6 @@
 <script>
 import { update } from "@/pages/api/user.js";
 const Cookie = process.client ? require("js-cookie") : undefined;
-import Vue from "Vue";
 import { mapMutations } from "vuex";
 export default {
   name: "SettingsIndex",
