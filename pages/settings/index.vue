@@ -73,7 +73,7 @@
 import { update } from "@/pages/api/user.js";
 const Cookie = process.client ? require("js-cookie") : undefined;
 import Vue from "Vue";
-import { mapMutations } from "Vuex";
+import { mapMutations } from "vuex";
 export default {
   name: "SettingsIndex",
   // 在路由匹配组件渲染之前会先执行中间件处理
