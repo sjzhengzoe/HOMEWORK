@@ -24,7 +24,7 @@ module.exports = (server, callback) => {
     }
   };
 
-  // 监视构建 template -> 调用 update -> 更新 Renderer 渲染器
+  // 1、监视构建 template -> 调用 update -> 更新 Renderer 渲染器
   const templatePath = path.resolve(__dirname, "../index.template.html");
   template = fs.readFileSync(templatePath, "utf-8");
   update();
@@ -34,7 +34,7 @@ module.exports = (server, callback) => {
     update();
   });
 
-  // 监视构建 serverBundle -> 调用 update -> 更新 Renderer 渲染器
+  // 2、监视构建 serverBundle -> 调用 update -> 更新 Renderer 渲染器
   const serverConfig = require("./webpack.server.config");
   const serverCompiler = webpack(serverConfig);
   const serverDevMiddleware = devMiddleware(serverCompiler, {
@@ -52,7 +52,7 @@ module.exports = (server, callback) => {
     update();
   });
 
-  // 监视构建 clientManifest -> 调用 update -> 更新 Renderer 渲染器
+  // 3、监视构建 clientManifest -> 调用 update -> 更新 Renderer 渲染器
   const clientConfig = require("./webpack.client.config");
   clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
   clientConfig.entry.app = [
@@ -80,7 +80,8 @@ module.exports = (server, callback) => {
     })
   );
 
-  // 重要！！！将 clientDevMiddleware 挂载到 Express 服务中，提供对其内部内存中数据的访问
+  // 4、重要！！！将 clientDevMiddleware 挂载到 Express 服务中，提供对其内部内存中数据的访问
+  // serverDevMiddleware不需要挂载 是因为服务端是直接读取的 但是客户端还需要通过https协议请求服务器的资源
   server.use(clientDevMiddleware);
 
   return onReady;
