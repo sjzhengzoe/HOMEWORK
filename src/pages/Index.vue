@@ -83,15 +83,18 @@
       </div>
       <div class="latest-journals">
         <div class="container">
-          <a href="/journal/gridsome-forestry-cms/" class="journal"
-            ><h3 class="journal-title">Gridsome with Forestry CMS</h3></a
-          ><a href="/journal/use-gridsome-vuejs/" class="journal"
-            ><h3 class="journal-title">VueJS for your next project</h3></a
-          ><a href="/journal/macos-development-environment/" class="journal"
-            ><h3 class="journal-title">macOS development environment</h3></a
-          ><a href="/journal/a-journal-entry/" class="journal"
-            ><h3 class="journal-title">About Typography</h3></a
-          >
+          <a href="/journal/gridsome-forestry-cms/" class="journal">
+            <h3 class="journal-title">Gridsome with Forestry CMS</h3>
+          </a>
+          <a href="/journal/use-gridsome-vuejs/" class="journal">
+            <h3 class="journal-title">VueJS for your next project</h3>
+          </a>
+          <a href="/journal/macos-development-environment/" class="journal">
+            <h3 class="journal-title">macOS development environment</h3>
+          </a>
+          <a href="/journal/a-journal-entry/" class="journal">
+            <h3 class="journal-title">About Typography</h3>
+          </a>
         </div>
       </div>
     </div>
