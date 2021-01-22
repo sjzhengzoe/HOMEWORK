@@ -1,50 +1,29 @@
 <template>
-  <div class="layout">
+  <div id="app" class="layout">
     <header class="header">
-      <strong>
-        <g-link to="/">{{ $static.metadata.siteName }}</g-link>
-      </strong>
-      <nav class="nav">
-        <g-link class="nav__link" to="/">Home</g-link>
-        <g-link class="nav__link" to="/about/">About</g-link>
-      </nav>
+      <div class="container">
+        <div class="left">
+          <a href="/" class="home-link active">
+            <g-image
+              src="~/assets/img/logo.svg"
+              width="60.05"
+              height="18"
+              alt="Nichlas W. Andersen"
+              class="logo"
+            />
+          </a>
+        </div>
+        <nav class="nav right">
+          <a href="/journal" aria-current="page" class="nav__link active--exact active">Journal</a
+          ><a href="/contact" class="nav__link">Say Hi!</a>
+        </nav>
+      </div>
     </header>
-    <slot/>
+    <slot></slot>
+    <footer class="footer">
+      <div class="container"><span>Copyright © 2021</span></div>
+    </footer>
   </div>
 </template>
 
-<static-query>
-query {
-  metadata {
-    siteName
-  }
-}
-</static-query>
-
-<style>
-body {
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  margin:0;
-  padding:0;
-  line-height: 1.5;
-}
-
-.layout {
-  max-width: 760px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  height: 80px;
-}
-
-.nav__link {
-  margin-left: 20px;
-}
-</style>
+<style></style>
