@@ -55,13 +55,14 @@
     border-bottom: 1px solid;
     border-color: transparent;
     transition: border .15s;
+    text-decoration: none;
 }
 
 .nav>:last-of-type {
     margin: 0
 }
 
-.nav>.active,.nav>:hover {
+.nav>.active--exact,.nav>:hover {
     border-color: inherit
 }
 
