@@ -1,55 +1,97 @@
 <template>
   <Layout>
-    <div data-v-7f3c42a8="" class="project">
-      <div data-v-7f3c42a8="" class="container">
+    <div
+      data-v-7f3c42a8=""
+      class="project"
+      v-for="(item, index) in $page.allProjectsData.edges"
+      :key="index"
+    >
+      <div
+        data-v-7f3c42a8=""
+        class="container"
+        v-if="`/src/assets/data${$route.path}` == item.node.path"
+      >
         <div data-v-7f3c42a8="" class="project-header">
-          <h1 data-v-7f3c42a8="" class="project-title">Banana</h1>
+          <h1 data-v-7f3c42a8="" class="project-title">
+            {{ item.node.data.post.title }}
+          </h1>
           <div data-v-7f3c42a8="" class="project-info">
             <div data-v-7f3c42a8="" class="categories-container">
               <div data-v-7f3c42a8="" class="categories">
-                <span data-v-7f3c42a8="" class="label">Categories</span
-                ><span data-v-7f3c42a8="" class="category">photography</span
-                ><span data-v-7f3c42a8="" class="category">pink</span>
+                <span data-v-7f3c42a8="" class="label">Categories</span>
+                <span
+                  data-v-7f3c42a8=""
+                  class="category"
+                  v-for="child in item.node.data.post.categories"
+                  :key="child + item"
+                  >{{ child }}</span
+                >
               </div>
             </div>
             <div data-v-7f3c42a8="" class="year-container">
               <span data-v-7f3c42a8="" class="label">Year</span>
-              <div data-v-7f3c42a8="">2019</div>
+              <div data-v-7f3c42a8="">{{ item.node.data.post.date }}</div>
             </div>
           </div>
         </div>
-        <div data-v-7f3c42a8="" class="content">
-          <p>
-            The&nbsp;<strong>banana</strong>&nbsp;fruits grow from
-            a&nbsp;<strong>banana</strong>&nbsp;blossom in hanging clusters, also called a bunch
-            or&nbsp;<strong>banana</strong> stem. The fruits grow in rows called tiers or hands.
-            There can be as many as twenty fruits to a hand, and as many as twenty tiers in a bunch.
-            A bunch usually weighs between 30 and 50 kilograms (65 to 110 pounds).
-          </p>
-          <p>
-            <g-image
-              src="~/assets/static/mike-dorner-173502-unsplash.jpg"
-              width="1008"
-              height="560"
-              alt="Banana"
-              class="g-image g-image--lazy g-image--loaded"
-            />
-          </p>
+        <div>
+          <p v-html="item.node.data.post.content" />
+          <img :src="item.node.data.post.img" alt="img" />
         </div>
       </div>
     </div>
   </Layout>
 </template>
 
+<page-query>
+query{
+    allProjectsData{
+      edges{
+        node{
+          path,
+          data{
+            post{
+              img,
+              title,
+              date,
+              content,
+              categories,project_bg_color,project_fg_color
+            }
+          }
+        }
+      } 
+		}
+}
+</page-query>
+
 <script>
 export default {
-  name: "",
+  metaInfo() {
+    return {
+      title: "Pineapple",
+      bodyAttrs: {
+        style: `color:${this.color}`,
+      },
+    };
+  },
+  name: "Projects",
   components: {},
   props: {},
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    color: (vm) => {
+      let color;
+      vm.$page.allProjectsData.edges.forEach((item) => {
+        let result = `/src/assets/data${vm.$route.path}` == item.node.path;
+        if (result) {
+          color = item.node.data.post.project_fg_color;
+        }
+      });
+      return color;
+    },
+  },
   watch: {},
   methods: {},
   created() {},

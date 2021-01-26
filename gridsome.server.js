@@ -5,12 +5,12 @@ module.exports = function(api) {
   // 创建页面
   api.createPages(({ createPage }) => {
     createPage({
-      path: "/projects/:type",
+      path: "/projects/:path",
       component: "./src/templates/Projects.vue",
     });
 
     createPage({
-      path: "/journal/:type",
+      path: "/journal/:path",
       component: "./src/templates/Journal.vue",
     });
   });

@@ -3,7 +3,7 @@
     <header class="header">
       <div class="container">
         <div class="left">
-          <a href="/" class="home-link active">
+          <router-link to="/" class="home-link active">
             <g-image
               src="~/assets/img/logo.svg"
               width="60.05"
@@ -11,11 +11,19 @@
               alt="Nichlas W. Andersen"
               class="logo"
             />
-          </a>
+          </router-link>
         </div>
         <nav class="nav right">
-          <a href="/journal" aria-current="page" class="nav__link active--exact active">Journal</a
-          ><a href="/contact" class="nav__link">Say Hi!</a>
+          <router-link
+            to="/journal"
+            aria-current="page"
+            class="nav__link active--exact"
+            exact
+            active-class="active"
+          >
+            Journal
+          </router-link>
+          <router-link to="/contact" class="nav__link">Say Hi!</router-link>
         </nav>
       </div>
     </header>

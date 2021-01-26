@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "@gridsome/source-filesystem": "^0.6.2",
+    "@gridsome/transformer-json": "^0.2.1",
     "@gridsome/transformer-remark": "^0.6.4",
-    "gridsome": "^0.7.0"
+    "gridsome": "^0.7.0",
+    "vue-meta": "^2.4.0"
   }
 }
