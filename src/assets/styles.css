@@ -34,7 +34,7 @@
     text-transform: uppercase
 }
 
-.nav> {
+.nav{
     font-size: .9rem;
     font-weight: 600;
     text-decoration: none;
@@ -58,12 +58,12 @@
     text-decoration: none;
 }
 
-.nav>:last-of-type {
+.nav:last-of-type {
     margin: 0
 }
 
 .nav>.active--exact,.nav>:hover {
-    border-color: inherit !important;
+    border-color: #000 !important;
 }
 
 .footer {
