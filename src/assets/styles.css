@@ -48,7 +48,6 @@
 .nav__link{
     font-size: .9rem;
     font-weight: 600;
-    text-decoration: none;
     margin-top: 4px;
     margin-right: 3rem;
     padding-bottom: 4px;
@@ -63,7 +62,7 @@
 }
 
 .nav>.active--exact,.nav>:hover {
-    border-color: inherit
+    border-color: inherit !important;
 }
 
 .footer {
