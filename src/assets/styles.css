@@ -62,7 +62,7 @@
     margin: 0
 }
 
-.nav>.active--exact,.nav>:hover {
+.nav>.active,.nav>:hover {
     border-color: #000 !important;
 }
 

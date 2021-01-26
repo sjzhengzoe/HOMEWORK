@@ -17,13 +17,15 @@
           <router-link
             to="/journal"
             aria-current="page"
-            class="nav__link active--exact"
+            class="nav__link"
             exact
             active-class="active"
           >
             Journal
           </router-link>
-          <router-link to="/contact" class="nav__link">Say Hi!</router-link>
+          <router-link to="/contact" class="nav__link" exact active-class="active"
+            >Say Hi!</router-link
+          >
         </nav>
       </div>
     </header>
