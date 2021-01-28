@@ -83,17 +83,21 @@ export function ref(raw) {
   if (isObject(raw) && raw.__v_isRef) {
     return;
   }
+  // 设置响应式
   let value = convert(raw);
   const r = {
     __v_isRef: true,
     get value() {
+      // 收集依赖
       track(r, "value");
       return value;
     },
     set value(newValue) {
       if (newValue !== value) {
         raw = newValue;
+        // 新值设置响应式
         value = convert(raw);
+        // 触发更新
         trigger(r, "value");
       }
     },
@@ -102,9 +106,11 @@ export function ref(raw) {
 }
 
 export function toRefs(proxy) {
+  // proxy 可能是响应式的数组 也可能是响应式的对象
   const ret = proxy instanceof Array ? new Array(proxy.length) : {};
 
   for (const key in proxy) {
+    // 把响应式对象的属性转成ref对象 都需要通过 .value 获取
     ret[key] = toProxyRef(proxy, key);
   }
 
@@ -112,6 +118,7 @@ export function toRefs(proxy) {
 }
 
 function toProxyRef(proxy, key) {
+  // 此处与ref不同 不进行收集依赖和触发更新 因为本身就是响应式数据
   const r = {
     __v_isRef: true,
     get value() {
@@ -127,6 +134,7 @@ function toProxyRef(proxy, key) {
 export function computed(getter) {
   const result = ref();
 
+  // 调用函数 并在这个过程中收集依赖 返回ref对象
   effect(() => (result.value = getter()));
 
   return result;
