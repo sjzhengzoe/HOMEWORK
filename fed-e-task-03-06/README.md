@@ -1,6 +1,4 @@
-##
-
-熊导 我先去 react 保证完了再回来补这次作业~ 先别评分哈~
+## 熊导 我先去 react 保证完了再回来补这次作业~ 先别评分哈~
 
 ## 说说 application/json 和 application/x-www-form-urlencoded 二者之间的区别。
 
