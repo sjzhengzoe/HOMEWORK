@@ -406,6 +406,7 @@ module.exports = function (webpackEnv) {
                 ],
                 
                 plugins: [
+                  require.resolve("@babel/plugin-transform-flow-strip-types"),
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
