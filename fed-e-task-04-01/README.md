@@ -1,33 +1,37 @@
-## 熊导 我先去 react 保证完了再回来补这次作业~ 先别评分哈~
+## 1. 请简述 React 16 版本中初始渲染的流程
+生成fiberRoot和rootFiber，并建立两者的关系fiberRoot.current = rootFiber，rootFiber.stateNode = fiberRoot。
+处理回调函数的this指向为render函数的第一个参数的dom元素。
+设置过期时间，防止因为优先级的原因该任务一直被打断而未能执行，到了过期时间还未执行就强制执行，初始化时不能被打断，所以被设置为一个固定的值，表示是同步任务，不可被打断。
+创建update对象并初始化
+设置update.payload = {element}
+设置update.callback = callback
+添加update到enqueueUpdate队列中
+构建workInProgressRoot，该阶段分为以下两个步骤。
+一、从父到子，构建当前fiber和children之间的parent关系，child和child之间的sibling关系
+二、从子到父
+    如果当前fiber有子级则返回子级为下一个处理的fiber，没有子级则先收集子级的effects到父effect中
+    如有兄弟节点则返回兄弟节点为下一个处理的fiber
+    如有父节点则返回父节点的兄弟节点为下一个处理的fiber
+render阶段结束
+commit阶段开始
+    销毁 workInProgress Fiber 树
+    第一个子阶段：执行DOM操作
+    第二个子阶段：执行DOM操作
+    第三个子阶段：指向操作DOM后
 
-## 说说 application/json 和 application/x-www-form-urlencoded 二者之间的区别。
+## 2. 为什么 React 16 版本中 render 阶段放弃了使用递归
+由于递归使用 JavaScript 自身的执行栈，一旦开始就无法停止，直到任务执行完成。如果 VirtualDOM 树的层级比较深，virtualDOM 的比对就会长期占用 JavaScript 主线程，由于 JavaScript 又是单线程的无法同时执行其他任务，所以在比对的过程中无法响应用户操作，无法即时执行元素动画，造成了页面卡顿的现象。
 
-application/x-www-form-urlencoded 方式是比较老的一种方式，这种方式的好处就是浏览器都支持，
+## 3. 请简述 React 16 版本中 commit 阶段的三个子阶段分别做了什么事情
+第一个子阶段：执行DOM操作
+    处理类组件的 getSnapShotBeforeUpdate 生命周期函数
+第二个子阶段：执行DOM操作
+    根据要做的dom操作的不同，进行dom操作
+第三个子阶段：指向操作DOM后
+    类组件处理生命周期函数以及执行callback函数
+    函数组件处理钩子函数
 
-在请求发送过程中会对数据进行序列化处理，以键值对形式？key1=value1&key2=value2 的方式发送到服务器，
 
-application/json，随着 json 规范的越来越流行，并且浏览器支持程度原来越好，许多开发人员易 application/json 作为请求 content-type，
-
-告诉服务器请求的主题内容是 json 格式的字符串，服务器端会对 json 字符串进行解析，
-
-这种方式的好处就是前端人员不需要关心数据结构的复杂度，
-
-只要是标准的 json 格式就能提交成功，application/json 数据格式越来越得到开发人员的青睐
-
-## 说一说在前端这块，角色管理你是如何设计的。
-
-## @vue/cli 跟 vue-cli 相比，@vue/cli 的优势在哪？
-
-CLI 2 和 CLI 3 第一个区别是 npm 包的包名，CLI 3 并没有沿用 CLI 2 的 vue-cli，而是另起为@vue/cli。创建项目方面也发生了变化，CLI 2 可以选择根据模板初始化项目，而 CLI 3 并未重新开发模板，
-如果开发者想要像 CLI 2 一样使用模板初始化项目，可全局安装一个桥接工具@vue/cli-init。
-
-CLI 2 和 CLI 3 第二个区别是: 生成的 vue 项目目录的命名改变，同时生成的目录结构，
-CLI 3 也隐藏了 webpack 配置文件
-
-link:https://gitpress.io/@rainy/vue-cli3
-
-## 详细讲一讲生产环境下前端项目的自动化部署的流程。
-
-## 你在开发过程中，遇到过哪些问题，又是怎样解决的？请讲出两点。
-
-## 针对新技术，你是如何过渡到项目中？
+## 4. 请简述 workInProgress Fiber 树存在的意义是什么
+即实现双缓存技术。
+在内存中构建workInProgress Fiber 树，等到构造完成后直接替换，即可解决白屏时间的问题。
