@@ -70,6 +70,7 @@ function applyMiddleware(...middlewares) {
       };
       // 调用中间件的第一层函数 传递阉割版的store对象
       var chain = middlewares.map((middleware) => middleware(middlewareAPI));
+      // 这里得到的dispatch就是第一个中间件 通过store.dispatch就会从第一个中间件开始调用 到最后调用reducer 链式调用在compose中处理
       var dispatch = compose(...chain)(store.dispatch);
       return {
         ...store,
@@ -82,6 +83,7 @@ function applyMiddleware(...middlewares) {
 function compose() {
   var funcs = [...arguments];
   return function (dispatch) {
+    // 注意 此处从最后一个中间件向前推导 因为只有最后一个中间件的next为dispatch才是已知的 这也就是为什么要嵌套三层函数
     for (var i = funcs.length - 1; i >= 0; i--) {
       dispatch = funcs[i](dispatch);
     }
