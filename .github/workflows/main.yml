@@ -18,7 +18,7 @@ jobs:
       uses: actions/setup-node@master
     - run: npm install
     - run: npm run build
-    - run: tar -zcvf release.tgz build package.json package-lock.json pm2.config.json
+    - run: tar -zcvf release.tgz build
 
     # 发布 Release
     - name: Create Release
@@ -56,5 +56,3 @@ jobs:
           cd /home/ubuntu/appleTree
           wget https://github.com/sjzhengzoe/HOMEWORK/releases/latest/download/release.tgz -O release.tgz
           tar zxvf release.tgz
-          npm install --production 
-          pm2 reload pm2.config.json
