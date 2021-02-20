@@ -3,13 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/core": "^1.0.0-rc.8",
+    "@chakra-ui/theme": "^1.6.2",
+    "@chakra-ui/transition": "^1.0.8",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
+    "axios": "^0.21.1",
+    "formik": "^2.2.6",
+    "framer-motion": "^3.5.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-icons": "^4.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
-    "web-vitals": "^1.1.0"
+    "web-vitals": "^1.1.0",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "start": "react-scripts start",
