@@ -53,6 +53,6 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /home/ubuntu/AppleTree
+          cd /home/ubuntu/ChakraTest
           wget https://github.com/sjzhengzoe/HOMEWORK/releases/latest/download/release.tgz -O release.tgz
           tar zxvf release.tgz

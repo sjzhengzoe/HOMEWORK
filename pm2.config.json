@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "appleTree",
+      "name": "ChakraTest",
       "script": "npm",
       "args": "start"
     }
