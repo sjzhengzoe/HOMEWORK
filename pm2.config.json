@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "appleTree",
+      "script": "npm",
+      "args": "start"
+    }
+  ]
+}
