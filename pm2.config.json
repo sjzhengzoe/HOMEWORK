@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "GoogleTest",
+      "script": "npm",
+      "args": "start"
+    }
+  ]
+}
