@@ -20,6 +20,12 @@ export default function Navigation() {
       <Menu.Item className={useActive("/shop", pathname)}>
         <Link to="/shop">商城</Link>
       </Menu.Item>
+      <Menu.Item className={useActive("/signin", pathname)}>
+        <Link to="/signin">登录</Link>
+      </Menu.Item>
+      <Menu.Item className={useActive("/signup", pathname)}>
+        <Link to="/signup">注册</Link>
+      </Menu.Item>
     </Menu>
   );
 }

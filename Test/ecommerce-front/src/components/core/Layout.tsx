@@ -13,7 +13,7 @@ const Layout: FC<Props> = function Layout({ children, title, subTitle }) {
     <div>
       <Navigation />
       <PageHeader className="jumbotron" title={title} subTitle={subTitle} />
-      {children}
+      <div style={{ width: "85%", margin: "auto" }}>{children}</div>
     </div>
   );
 };
