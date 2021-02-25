@@ -2,7 +2,7 @@ import { Form, Input, Button, Result } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { signup, SignupPayload } from "../../store/actions/auth.action";
+import { resetSignup, signup, SignupPayload } from "../../store/actions/auth.action";
 import { AppState } from "../../store/reducers";
 import { AuthState } from "../../store/reducers/auth.reducer";
 import Layout from "./Layout";
@@ -28,8 +28,10 @@ export default function SignUp() {
 
   //   离开页面 重置状态
   useEffect(() => {
-    return () => {};
-  }, [auth]);
+    return () => {
+      dispatch(resetSignup());
+    };
+  }, []);
 
   return (
     <Layout title="注册" subTitle="">
