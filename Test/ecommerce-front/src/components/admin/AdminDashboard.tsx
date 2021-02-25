@@ -1,15 +1,13 @@
 import { Col, Menu, Row, Typography, Descriptions } from "antd";
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
-import { isAuth, isRole } from "../../helper/auth";
+import { Link } from "react-router-dom";
+import { isAuth } from "../../helper/auth";
 import Layout from "../core/Layout";
 import { ShoppingCartOutlined, UserOutlined, OrderedListOutlined } from "@ant-design/icons";
 import { Jwt } from "../../store/models/auth";
 const { Title } = Typography;
 
 export default function AdminDashboard() {
-  let role = isRole();
-  if (!role) return <Redirect to="/user/dashboard" />;
   const {
     user: { name, email },
   } = isAuth() as Jwt;
