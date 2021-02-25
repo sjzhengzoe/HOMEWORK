@@ -15,7 +15,8 @@ import {
 // 注册
 function* handleSignup(action: SignupAction) {
   try {
-    yield axios.post(`${API}/signup`, action.payload);
+    // sujie test
+    // yield axios.post(`${API}/signup`, action.payload);
     yield put(signupSuccess());
   } catch (error) {
     yield put(signupFail(error.response.data.error));
@@ -25,7 +26,19 @@ function* handleSignup(action: SignupAction) {
 // 登录
 function* handleSignin(action: SigninAction) {
   try {
-    let response = yield axios.post(`${API}/signin`, action.payload);
+    // let response = yield axios.post(`${API}/signin`, action.payload);
+    // sujie test
+    let response = {
+      data: {
+        token: "token",
+        user: {
+          email: "zhengsujie@163.com",
+          name: "zoe",
+          role: 1,
+          _id: "id",
+        },
+      },
+    };
     localStorage.setItem("jwt", JSON.stringify(response.data));
     yield put(signinSuccess());
   } catch (error) {

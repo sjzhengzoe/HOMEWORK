@@ -1,7 +1,10 @@
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Result } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { isAuth } from "../../helper/auth";
 import { resetSignin, signin, SignupPayload } from "../../store/actions/auth.action";
+import { Jwt } from "../../store/models/auth";
 import { AppState } from "../../store/reducers";
 import { AuthState } from "../../store/reducers/auth.reducer";
 import Layout from "./Layout";
@@ -19,11 +22,21 @@ export default function SignIn() {
   };
 
   // 登录成功 清空表单
-  useEffect(() => {
-    if (auth.signin.loaded && auth.signin.success) {
-      form.resetFields();
+  const redirectToDashboard = () => {
+    const auth = isAuth();
+    if (auth) {
+      const {
+        user: { role },
+      } = auth as Jwt;
+      if (role === 0) {
+        //  用户
+        return <Redirect to="/user/dashboard" />;
+      } else {
+        // 管理员
+        return <Redirect to="/admin/dashboard" />;
+      }
     }
-  }, [auth, form]);
+  };
 
   // 离开页面 重置状态
   useEffect(() => {
@@ -34,6 +47,14 @@ export default function SignIn() {
 
   return (
     <Layout title="登录" subTitle="嘿，小伙伴，立即登录到拉勾电商系统吧">
+      {/* 跳转 */}
+      {redirectToDashboard()}
+      {/* 登录失败 显示失败的提示信息 */}
+      {auth.signin.loaded && !auth.signin.success ? (
+        <Result status="warning" title="登录失败" subTitle={auth.signin.message} />
+      ) : null}
+
+      {/* 登录表单 */}
       <Form form={form} onFinish={onFinish}>
         <Form.Item name="email" label="邮箱">
           <Input />
