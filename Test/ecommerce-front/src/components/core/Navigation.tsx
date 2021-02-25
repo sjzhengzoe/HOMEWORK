@@ -3,8 +3,7 @@ import { RouterState } from "connected-react-router";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { isAuth } from "../../helper/auth";
-import { Jwt } from "../../store/models/auth";
+import { isAuth, isRole } from "../../helper/auth";
 import { AppState } from "../../store/reducers";
 
 function useActive(currentPath: string, path: string) {
@@ -13,12 +12,9 @@ function useActive(currentPath: string, path: string) {
 
 function getDashboardUrl(): string {
   const auth = isAuth();
-  let url = "admin/dashboard";
+  let url = "/user/dashboard";
   if (auth) {
-    const {
-      user: { role },
-    } = auth as Jwt;
-    if (role === 0) url = "user/dashboard";
+    if (isRole()) url = "/admin/dashboard";
   }
   return url;
 }

@@ -2,7 +2,7 @@ import { Form, Input, Button, Result } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { isAuth } from "../../helper/auth";
+import { isAuth, isRole } from "../../helper/auth";
 import { resetSignin, signin, SignupPayload } from "../../store/actions/auth.action";
 import { Jwt } from "../../store/models/auth";
 import { AppState } from "../../store/reducers";
@@ -25,10 +25,7 @@ export default function SignIn() {
   const redirectToDashboard = () => {
     const auth = isAuth();
     if (auth) {
-      const {
-        user: { role },
-      } = auth as Jwt;
-      if (role === 0) {
+      if (!isRole) {
         //  用户
         return <Redirect to="/user/dashboard" />;
       } else {

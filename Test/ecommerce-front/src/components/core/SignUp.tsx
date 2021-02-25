@@ -1,7 +1,8 @@
 import { Form, Input, Button, Result } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { isAuth, isRole } from "../../helper/auth";
 import { resetSignup, signup, SignupPayload } from "../../store/actions/auth.action";
 import { AppState } from "../../store/reducers";
 import { AuthState } from "../../store/reducers/auth.reducer";
@@ -26,6 +27,20 @@ export default function SignUp() {
     }
   }, [auth, form]);
 
+  // 跳转dashboard 不是刚注册成功的情况
+  const redirectToDashboard = () => {
+    const auth = isAuth();
+    if (auth) {
+      if (!isRole) {
+        //  用户
+        return <Redirect to="/user/dashboard" />;
+      } else {
+        // 管理员
+        return <Redirect to="/admin/dashboard" />;
+      }
+    }
+  };
+
   //   离开页面 重置状态
   useEffect(() => {
     return () => {
@@ -35,6 +50,7 @@ export default function SignUp() {
 
   return (
     <Layout title="注册" subTitle="">
+      {!auth.signup.loaded && !auth.signup.success && redirectToDashboard()}
       {/* 注册成功 显示成功的提示信息， */}
       {auth.signup.loaded && auth.signup.success ? (
         <Result
