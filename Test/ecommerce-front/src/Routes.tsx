@@ -10,6 +10,7 @@ import UserDashboard from "./components/core/UserDashboard";
 import { isRole } from "./helper/auth";
 import React from "react";
 import AddCategory from "./components/admin/AddCategory";
+import AddProduct from "./components/admin/AddProduct";
 
 // 区分是否是管理员
 function adminOrUser(Admin: any, User: any): any {
@@ -41,6 +42,8 @@ export default function Routes() {
         />
         {/* 添加分类 */}
         <PrivateRoute path="/create/category" component={adminOrUser(AddCategory, "/")} />
+        {/* 添加商品 */}
+        <PrivateRoute path="/create/product" component={adminOrUser(AddProduct, "/")} />
       </Switch>
     </HashRouter>
   );
