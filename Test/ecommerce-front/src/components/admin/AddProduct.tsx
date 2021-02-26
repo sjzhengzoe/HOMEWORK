@@ -10,7 +10,7 @@ import { API } from "../../config";
 import { Jwt } from "../../store/models/auth";
 import { CategoryState } from "../../store/reducers/category.reducer";
 import { getCategory } from "../../store/actions/category.actions";
-import { isAuth } from "../../helper/auth";
+import { isAuth } from "../../helpers/auth";
 
 const AddProduct = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import { Col, Menu, Row, Typography, Descriptions } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
-import { isAuth } from "../../helper/auth";
+import { isAuth } from "../../helpers/auth";
 import Layout from "../core/Layout";
 import { ShoppingCartOutlined, UserOutlined, OrderedListOutlined } from "@ant-design/icons";
 import { Jwt } from "../../store/models/auth";

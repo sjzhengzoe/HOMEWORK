@@ -2,7 +2,7 @@ import { Form, Input, Button, Result } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import { isAuth, isRole } from "../../helper/auth";
+import { isAuth, isRole } from "../../helpers/auth";
 import { resetSignup, signup, SignupPayload } from "../../store/actions/auth.action";
 import { AppState } from "../../store/reducers";
 import { AuthState } from "../../store/reducers/auth.reducer";

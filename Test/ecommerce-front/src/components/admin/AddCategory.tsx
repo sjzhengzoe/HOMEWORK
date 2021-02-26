@@ -5,7 +5,7 @@ import axios from "axios";
 import { API } from "../../config";
 import { Jwt } from "../../store/models/auth";
 import { Link } from "react-router-dom";
-import { isAuth } from "../../helper/auth";
+import { isAuth } from "../../helpers/auth";
 
 const AddCategory = () => {
   const [name, setName] = useState<string>("");

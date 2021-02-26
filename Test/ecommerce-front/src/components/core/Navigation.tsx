@@ -3,7 +3,7 @@ import { RouterState } from "connected-react-router";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { isAuth, isRole } from "../../helper/auth";
+import { isAuth, isRole } from "../../helpers/auth";
 import { AppState } from "../../store/reducers";
 
 function useActive(currentPath: string, path: string) {

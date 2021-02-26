@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
-import { isAuth } from "../../helper/auth";
+import { isAuth } from "../../helpers/auth";
 
 interface PrivateRouteProps extends RouteProps {
   path: string;
