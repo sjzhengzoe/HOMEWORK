@@ -7,14 +7,15 @@ interface PrivateRouteProps extends RouteProps {
   component: React.ComponentType<any>;
 }
 
-const UserPrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...rest }) => {
+const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={(props) => {
+      render={() => {
         const auth = isAuth();
         if (auth) {
-          return <Component {...props} />;
+          console.log(Component, typeof Component === "string");
+          return typeof Component === "string" ? <Redirect to={Component} /> : <Component />;
         } else {
           return <Redirect to="/signin" />;
         }
@@ -23,4 +24,4 @@ const UserPrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...rest
   );
 };
 
-export default UserPrivateRoute;
+export default PrivateRoute;

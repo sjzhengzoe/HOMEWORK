@@ -57,7 +57,7 @@ export default function SignIn() {
           <Input />
         </Form.Item>
         <Form.Item name="password" label="密码">
-          <Input />
+          <Input.Password />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">

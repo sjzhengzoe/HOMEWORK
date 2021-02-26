@@ -10,6 +10,7 @@ import UserDashboard from "./components/core/UserDashboard";
 import { isRole } from "./helper/auth";
 import React from "react";
 import AddCategory from "./components/admin/AddCategory";
+
 // 区分是否是管理员
 function adminOrUser(Admin: any, User: any): any {
   let role = isRole();
@@ -20,19 +21,26 @@ export default function Routes() {
   return (
     <HashRouter>
       <Switch>
+        {/* 首页 */}
         <Route path="/" component={Home} exact />
+        {/* 商品页 */}
         <Route path="/shop" component={Shop} />
+        {/* 登录页 */}
         <Route path="/signin" component={SignIn} />
+        {/* 注册页 */}
         <Route path="/signup" component={SignUp} />
+        {/* 个人中心 - 管理员 */}
         <PrivateRoute
           path="/admin/dashboard"
-          component={adminOrUser(AdminDashboard, <Redirect to="/user/dashboard" />)}
+          component={adminOrUser(AdminDashboard, "/user/dashboard")}
         />
+        {/* 个人中心 - 用户 */}
         <PrivateRoute
           path="/user/dashboard"
-          component={adminOrUser(UserDashboard, <Redirect to="/user/dashboard" />)}
+          component={adminOrUser("/admin/dashboard", UserDashboard)}
         />
-        <PrivateRoute path="/create/category" component={adminOrUser(AddCategory, null)} />
+        {/* 添加分类 */}
+        <PrivateRoute path="/create/category" component={adminOrUser(<AddCategory />, null)} />
       </Switch>
     </HashRouter>
   );
