@@ -37,8 +37,11 @@ const AddCategory = () => {
   }, [name]);
 
   const onFinish = (value: { name: string }) => {
-    console.log(value);
-    setName(value.name);
+    if (name === value.name) {
+      message.error("请勿添加相同的分类");
+    } else {
+      setName(value.name);
+    }
   };
   return (
     <Layout title="添加分类" subTitle="">
