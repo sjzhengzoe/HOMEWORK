@@ -40,7 +40,7 @@ export default function Routes() {
           component={adminOrUser("/admin/dashboard", UserDashboard)}
         />
         {/* 添加分类 */}
-        <PrivateRoute path="/create/category" component={adminOrUser(<AddCategory />, null)} />
+        <PrivateRoute path="/create/category" component={adminOrUser(AddCategory, "/")} />
       </Switch>
     </HashRouter>
   );

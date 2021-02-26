@@ -14,7 +14,6 @@ const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...rest }) 
       render={() => {
         const auth = isAuth();
         if (auth) {
-          console.log(Component, typeof Component === "string");
           return typeof Component === "string" ? <Redirect to={Component} /> : <Component />;
         } else {
           return <Redirect to="/signin" />;
